@@ -1,7 +1,9 @@
-# pangeo in relation to CMR, the NASA Common Metadata Repository
+# pangeo in relation to CMR
+
+## CMR is the NASA Common Metadata Repository
 
 
-## Introduction
+### Introduction
 
 This repo in broad strokes asks a pangeo-centric question: 
 
@@ -44,7 +46,7 @@ What about using WMSii (the only good plural of WMS)? And including maps in Jupy
 
 Ok so with that, plenty to think about, let's paste in a few...
 
-## Links
+### Links
 
 * [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
 * [CMR](https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository)
