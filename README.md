@@ -50,7 +50,6 @@ Ok so with that, plenty to think about, let's paste in a few...
 * [CMR](https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository)
 * [GIBS](https://pypi.python.org/pypi/python-cmr/0.3.1)
 * [Python-CMR](https://pypi.python.org/pypi/python-cmr/0.3.1)
-* [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
 * [NEP NASA Earth Observations WMS resource page](https://neo.sci.gsfc.nasa.gov/about/wms.php)
 
 
