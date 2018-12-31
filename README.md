@@ -62,3 +62,8 @@ Search 'NASA WMS' to find NASA (often Goddard) Web Mapping Services.
 Add some as layers to an ipyleaflet Map: In a perfect world this works well...
 but in reality we need some guidance on GetCapabilities and layer qualifiers and how to debug bad layers.)
 
+
+### Datasets of interest
+
+* Anything that comes out of the python-cmr interface query
+* GOLIVE and its successor ITSLIVE are two surface ice velocity products at NSIDC
