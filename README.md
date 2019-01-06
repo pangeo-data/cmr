@@ -1,53 +1,47 @@
 # pangeo in relation to CMR
 
-## CMR is the NASA Common Metadata Repository
-
+## CMR is the NASA **Common Metadata Repository**
 
 ### Introduction
 
-This repo asks a broad pangeo-centric question... 
+This repo asks (answers) pangeo-centric questions... 
 
 
-> **Whereas NASA supoorts this work to promote access to earth remote sensing data, and 
-> whereas in pangeo we have organized/automated computing horsepower and infrastructure... 
-> what is the learning process and combination of tutorials that enables a newcomer to do
-> productive research using those data? 
-> And what does this NASA-driven pantheon of data look like? 
-> Are there other resources with comparable type, style and scope to be aware of?**
+> **NASA intends the pangeo project will support access to earth remote sensing data (and related)
+via the public cloud and technologies built thereupon. This involves organized/automated 
+computing horsepower and infrastructure. In turn this begs a number of questions, foremost
+'What is the learning process that enables a scientist to take advantage of both pangeo and CMR?' 
+Jointly 'What does this pantheon of data look like?' and 'Are there other comparable resources
+(type, style, scope) to be aware of?'**
 
 
-In less grandiose manner we begin here with the NASA CMR (Common Metadata Repository) and code in a 
-Jupyter notebook. **CMR** is ideally 'one stop shopping' for metadata on NASA remote sensing resources (earth only).
-The CMR API is accessible via the python-cmr package; so we examine this here.
+This repo begins with 'How to access metadata from the NASA CMR from a Jupyter notebook?' 
+We use the python-cmr package and build the notebooks in a science/tutorial manner. From
+that starting point we expand out to the NASA data ecosystem, starting with...
+
+* CMR
+* GIBS: (NASA) Global Image Browser System
+* EOSDIS
+* DAACs: [NASA Distributed Active Archive Centers](https://nssdc.gsfc.nasa.gov/earth/daacs.html).
+* MEaSUREs
+* [Giovanni](http://giovanni.gsfc.nasa.gov/giovanni/): A Goddard Space Flight Center data application
 
 
-Also of interest is **GIBS**, NASA's Global Image Browser System, ideally one-stop shopping for imagery.
-We also want to understand the relationship between **CMR**, **GIBS** and 
-[NASA Distributed Active Archive Centers (DAACs)](https://nssdc.gsfc.nasa.gov/earth/daacs.html).
+From there we proceed to...
 
-
-Other NASA projects have produced particular portals. Goddard Space Flight Center (GSFC) 
-via GES DISC (Goddard Earth Science Data and Information Services Center)
-has produced a data web app called [Giovanni]( http://giovanni.gsfc.nasa.gov/giovanni/). 
-So let's cover that. 
-
-
-What about NASA-external platforms for working with NASA-generated data like LANDSAT? 
-We have in mind [Google Earth Engine (GEE)](https://earthengine.google.com) 
-as well as AWS hosting of LANDSAT data, to begin with. 
-
-
-What about non-NASA remote sensing resources? We have in mind [Planet](https://www.planet.com).
-
-
-InSAR.
-
-
-Web Mapping Services. Including maps in Jupyter notebooks whereupon to place such tiles?
-
+* NASA-external platforms for working with NASA-generated data like LANDSAT 
+  * [Google Earth Engine (GEE)](https://earthengine.google.com)
+  * AWS hosting of LANDSAT 
+  * Jupyter Hubs
+  * GOLIVE / ITSLIVE Land Ice Velocity and Elevation derived data products
+* NASA-external data sources
+  * [Planet](https://www.planet.com).
+* Web Mapping Services
+  * Includes map controls like **ipyleaflet**
 
 
 ### Links
+
 
 * [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
 * [CMR](https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository)
