@@ -15,16 +15,14 @@ Jointly 'What does this pantheon of data look like?' and 'Are there other compar
 (type, style, scope) to be aware of?'**
 
 
-This repo begins with 'How to access metadata from the NASA CMR from a Jupyter notebook?' 
-We use the python-cmr package and build the notebooks in a science/tutorial manner. From
-that starting point we expand out to the NASA data ecosystem, starting with...
+This repo includes some basic tactics; basically *How to access metadata from the NASA CMR from a Jupyter notebook?*
+However it is really a higher-level effort to get our collective arms around the learning and adoption process: By example.
+We have links to outreach efforts such as Damien Irving's excellent software carpentry sequence on Python for Ocean and
+Atmospheric Sciences. We use the python-cmr package to build notebooks here that bootstrap a picture of NASA data 
+holdings. 
 
-* CMR
-* GIBS: (NASA) Global Image Browser System
-* EOSDIS
 * DAACs: [NASA Distributed Active Archive Centers](https://nssdc.gsfc.nasa.gov/earth/daacs.html)
   * DAAC not-DAAC: A study of the [**GOLIVE**](https://nsidc.org/data/NSIDC-0710) dataset
-* MEaSUREs
 * [Giovanni](http://giovanni.gsfc.nasa.gov/giovanni/): A Goddard Space Flight Center data application
 
 
@@ -43,16 +41,36 @@ From there we proceed to...
 
 ### Links
 
-* [Need the Damien oceanography link here]
-* [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
-* [CMR](https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository)
-* [GIBS](https://pypi.python.org/pypi/python-cmr/0.3.1)
-* [Python-CMR](https://pypi.python.org/pypi/python-cmr/0.3.1)
-* [NEP NASA Earth Observations WMS resource page](https://neo.sci.gsfc.nasa.gov/about/wms.php)
+#### Education Outreach 
+
+
+* [Damien Irving oceanography data carpentry blog](https://datacarpentry.org/blog/2018/09/atmos-ocean-launch)
+  * Related [AOS tutorials](https://carpentrieslab.github.io/python-aos-lesson/)
 * [EarthML](http://earthml.pyviz.org/index.html)
+* [pangeo cmr repo](https://github.com/pangeo-data/cmr)
+* [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
+
+
+#### Organizations
+
+* [pangeo](https://pangeo.io/)
 * [Ocean pangeo](https://github.com/raphaeldussin/example.pangeo.io-deploy)
 * [Atmos pangeo https://github.com/pangeo-data/atmos.pangeo.io-deploy
 
+
+* [EOSDIS](https://earthdata.nasa.gov/about) the NASA Earth Observing System Data Information System
+* [CMR](https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository)
+* [GIBS](https://pypi.python.org/pypi/python-cmr/0.3.1) for browsing NASA imagery
+* [NASA Distributed Active Archive Centers](https://nssdc.gsfc.nasa.gov/earth/daacs.html)
+* [MEaSUREs]()https://earthdata.nasa.gov/community/community-data-system-programs/measures-projects)
+* [EarthML](http://earthml.pyviz.org/index.html)
+
+
+#### Tech and Tactics
+
+
+* [Python-CMR](https://pypi.python.org/pypi/python-cmr/0.3.1)
+* [NEP NASA Earth Observations WMS resource page](https://neo.sci.gsfc.nasa.gov/about/wms.php)
 
 
 ### Note on WMS
