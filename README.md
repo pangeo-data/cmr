@@ -28,10 +28,11 @@ Atmospheric Sciences. We provide Python notebooks that demonstrate a set of usef
 
 
 * [Damien Irving oceanography data carpentry blog](https://datacarpentry.org/blog/2018/09/atmos-ocean-launch)
-  * Related [AOS tutorials](https://carpentrieslab.github.io/python-aos-lesson/)
+  * ...and Damien's related [AOS tutorials](https://carpentrieslab.github.io/python-aos-lesson/)
 * [EarthML](http://earthml.pyviz.org/index.html)
+* [Research Computing in Earth Sciences course](https://rabernat.github.io/research_computing_2018/) by Ryan Abernathy
 * [pangeo cmr repo](https://github.com/pangeo-data/cmr)
-* [**GOLIVE**](https://nsidc.org/data/NSIDC-0710) ice velocity notebooks are present in this repo
+  * ...including [**GOLIVE**](https://nsidc.org/data/NSIDC-0710) ice velocity notebooks 
 * [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
 * [Giovanni](http://giovanni.gsfc.nasa.gov/giovanni/) data discover application from Goddard
 
