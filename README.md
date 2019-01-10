@@ -42,7 +42,7 @@ Atmospheric Sciences. We provide Python notebooks that demonstrate a set of usef
 
 * [pangeo](https://pangeo.io/)
 * [Ocean pangeo](https://github.com/raphaeldussin/example.pangeo.io-deploy)
-* [Atmos pangeo https://github.com/pangeo-data/atmos.pangeo.io-deploy
+* [Atmos pangeo](https://github.com/pangeo-data/atmos.pangeo.io-deploy)
 
 
 * [EOSDIS](https://earthdata.nasa.gov/about) the NASA Earth Observing System Data Information System
