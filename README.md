@@ -21,13 +21,10 @@ We have links to outreach efforts such as Damien Irving's excellent software car
 Atmospheric Sciences. We provide Python notebooks that demonstrate a set of useful tools applied to various data resources. 
 
 
-From there we proceed to...
-
-
 
 ### Links
 
-#### Education Outreach 
+#### Education and Outreach 
 
 
 * [Damien Irving oceanography data carpentry blog](https://datacarpentry.org/blog/2018/09/atmos-ocean-launch)
@@ -41,6 +38,7 @@ From there we proceed to...
 
 
 #### Organizations
+
 
 * [pangeo](https://pangeo.io/)
 * [Ocean pangeo](https://github.com/raphaeldussin/example.pangeo.io-deploy)
