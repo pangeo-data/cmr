@@ -65,9 +65,9 @@ Atmospheric Sciences. We provide Python notebooks that demonstrate a set of usef
 
 * NASA-external platforms for working with NASA-generated data like LANDSAT 
   * [Google Earth Engine (GEE)](https://earthengine.google.com)
-  * AWS hosting of LANDSAT 
+  * [AWS hosting of LANDSAT](https://registry.opendata.aws/landsat-8/) 
   * Jupyter Hubs
-  * GOLIVE / ITSLIVE Land Ice Velocity and Elevation derived data products
+  * [GOLIVE](https://nsidc.org/data/NSIDC-0710) / ITSLIVE Land Ice Velocity and Elevation derived data products
 * NASA-external data sources
   * [Planet](https://www.planet.com)
 * Web Mapping Services
