@@ -22,7 +22,8 @@ that starting point we expand out to the NASA data ecosystem, starting with...
 * CMR
 * GIBS: (NASA) Global Image Browser System
 * EOSDIS
-* DAACs: [NASA Distributed Active Archive Centers](https://nssdc.gsfc.nasa.gov/earth/daacs.html).
+* DAACs: [NASA Distributed Active Archive Centers](https://nssdc.gsfc.nasa.gov/earth/daacs.html)
+  * DAAC not-DAAC: A study of the [**GOLIVE**](https://nsidc.org/data/NSIDC-0710) dataset
 * MEaSUREs
 * [Giovanni](http://giovanni.gsfc.nasa.gov/giovanni/): A Goddard Space Flight Center data application
 
@@ -35,19 +36,22 @@ From there we proceed to...
   * Jupyter Hubs
   * GOLIVE / ITSLIVE Land Ice Velocity and Elevation derived data products
 * NASA-external data sources
-  * [Planet](https://www.planet.com).
+  * [Planet](https://www.planet.com)
 * Web Mapping Services
   * Includes map controls like **ipyleaflet**
 
 
 ### Links
 
-
+* [Need the Damien oceanography link here]
 * [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
 * [CMR](https://earthdata.nasa.gov/about/science-system-description/eosdis-components/common-metadata-repository)
 * [GIBS](https://pypi.python.org/pypi/python-cmr/0.3.1)
 * [Python-CMR](https://pypi.python.org/pypi/python-cmr/0.3.1)
 * [NEP NASA Earth Observations WMS resource page](https://neo.sci.gsfc.nasa.gov/about/wms.php)
+* [EarthML](http://earthml.pyviz.org/index.html)
+* [Ocean pangeo](https://github.com/raphaeldussin/example.pangeo.io-deploy)
+* [Atmos pangeo https://github.com/pangeo-data/atmos.pangeo.io-deploy
 
 
 
