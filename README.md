@@ -4,7 +4,7 @@
 
 ### Introduction
 
-This repo asks (answers) pangeo-centric questions... 
+This repo asks (answers) some pangeo-centric questions... 
 
 
 > **NASA intends the pangeo project will support access to earth remote sensing data (and related)
@@ -15,28 +15,14 @@ Jointly 'What does this pantheon of data look like?' and 'Are there other compar
 (type, style, scope) to be aware of?'**
 
 
-This repo includes some basic tactics; basically *How to access metadata from the NASA CMR from a Jupyter notebook?*
-However it is really a higher-level effort to get our collective arms around the learning and adoption process: By example.
+We begin in the notebooks with basic tactics; basically *How to access metadata from the NASA CMR from a Jupyter notebook?*
+However this repo is really a higher-level effort to get our collective arms around the learning and adoption process, by example.
 We have links to outreach efforts such as Damien Irving's excellent software carpentry sequence on Python for Ocean and
-Atmospheric Sciences. We use the python-cmr package to build notebooks here that bootstrap a picture of NASA data 
-holdings. 
-
-* DAACs: [NASA Distributed Active Archive Centers](https://nssdc.gsfc.nasa.gov/earth/daacs.html)
-  * DAAC not-DAAC: A study of the [**GOLIVE**](https://nsidc.org/data/NSIDC-0710) dataset
-* [Giovanni](http://giovanni.gsfc.nasa.gov/giovanni/): A Goddard Space Flight Center data application
+Atmospheric Sciences. We provide Python notebooks that demonstrate a set of useful tools applied to various data resources. 
 
 
 From there we proceed to...
 
-* NASA-external platforms for working with NASA-generated data like LANDSAT 
-  * [Google Earth Engine (GEE)](https://earthengine.google.com)
-  * AWS hosting of LANDSAT 
-  * Jupyter Hubs
-  * GOLIVE / ITSLIVE Land Ice Velocity and Elevation derived data products
-* NASA-external data sources
-  * [Planet](https://www.planet.com)
-* Web Mapping Services
-  * Includes map controls like **ipyleaflet**
 
 
 ### Links
@@ -48,7 +34,10 @@ From there we proceed to...
   * Related [AOS tutorials](https://carpentrieslab.github.io/python-aos-lesson/)
 * [EarthML](http://earthml.pyviz.org/index.html)
 * [pangeo cmr repo](https://github.com/pangeo-data/cmr)
+* [**GOLIVE**](https://nsidc.org/data/NSIDC-0710) ice velocity notebooks are present in this repo
 * [Jupyter notebook editing shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
+* [Giovanni](http://giovanni.gsfc.nasa.gov/giovanni/) data discover application from Goddard
+
 
 
 #### Organizations
@@ -73,13 +62,18 @@ From there we proceed to...
 * [NEP NASA Earth Observations WMS resource page](https://neo.sci.gsfc.nasa.gov/about/wms.php)
 
 
-### Note on WMS
-Search 'NASA WMS' to find NASA (often Goddard) Web Mapping Services. 
-Add some as layers to an ipyleaflet Map: In a perfect world this works well...
-but in reality we need some guidance on GetCapabilities and layer qualifiers and how to debug bad layers.)
+#### External resources
 
 
-### Datasets of interest
+* NASA-external platforms for working with NASA-generated data like LANDSAT 
+  * [Google Earth Engine (GEE)](https://earthengine.google.com)
+  * AWS hosting of LANDSAT 
+  * Jupyter Hubs
+  * GOLIVE / ITSLIVE Land Ice Velocity and Elevation derived data products
+* NASA-external data sources
+  * [Planet](https://www.planet.com)
+* Web Mapping Services
+  * Includes map controls like **ipyleaflet**
+  * Search 'NASA WMS' to find NASA (often Goddard) Web Mapping Services. 
+    * Add to ipyleaflet Map; GetCapabilities and layer qualifiers help needed
 
-* Anything that comes out of the python-cmr interface query
-* GOLIVE and its successor ITSLIVE are two surface ice velocity products at NSIDC
