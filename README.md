@@ -59,6 +59,7 @@ Atmospheric Sciences. We provide Python notebooks that demonstrate a set of usef
 
 * [Python-CMR](https://pypi.python.org/pypi/python-cmr/0.3.1)
 * [NEP NASA Earth Observations WMS resource page](https://neo.sci.gsfc.nasa.gov/about/wms.php)
+* [STAC catalog program](https://github.com/radiantearth/stac-spec)
 
 
 #### External resources
@@ -71,6 +72,7 @@ Atmospheric Sciences. We provide Python notebooks that demonstrate a set of usef
   * [GOLIVE](https://nsidc.org/data/NSIDC-0710) / ITSLIVE Land Ice Velocity and Elevation derived data products
 * NASA-external data sources
   * [Planet](https://www.planet.com)
+  * [Polarhub]( http://polar.geodacenter.org/polarhub) is Wenwen Li's cryo crawler
 * Web Mapping Services
   * Includes map controls like **ipyleaflet**
   * Search 'NASA WMS' to find NASA (often Goddard) Web Mapping Services. 
