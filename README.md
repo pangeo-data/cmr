@@ -78,3 +78,32 @@ Atmospheric Sciences. We provide Python notebooks that demonstrate a set of usef
   * Search 'NASA WMS' to find NASA (often Goddard) Web Mapping Services. 
     * Add to ipyleaflet Map; GetCapabilities and layer qualifiers help needed
 
+
+#### More Tactics
+
+As I am running into debugging issues I'm recording some installation steps on an EC2 instance 
+with the idea of using an AMI to grab horsepower/RAM/disk space as needed. 
+
+```
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+rm Miniconda3-latest-Linux-x86_64.sh
+```
+
+This install miniconda. Then we have an environment config/activate:
+
+
+```
+conda create -n golive python=3.6
+conda activate golive
+```
+
+...and then some package installations...
+
+
+```
+conda install pandas
+conda install netcdf4
+conda install xarray
+conda install ipywidgets
+```
