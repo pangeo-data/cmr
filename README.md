@@ -98,7 +98,16 @@ conda create -n golive python=3.6
 conda activate golive
 ```
 
-...and then some package installations...
+...and `requirements.txt`...
+
+```
+boto3==1.9.78
+obspy==1.1.0
+Pillow==5.4.1
+```
+
+
+...and some package installations not in the requirements...
 
 
 ```
