@@ -1,17 +1,30 @@
-# SubFolder articulation of how pangeo works
+# Outreach: Draft articulation of how pangeo works
 
-Suppose I am a Researcher with a moderately ambitious interest in understanding *why* I want to work in the pangeo environment
-and *how* the pangeo environment comes together. To build the context, this narrative: 
+I am a Researcher with a moderately ambitious interest in understanding *why* I want to work in the pangeo environment
+and *how* the pangeo environment comes together. To build the context: First a reminder of the three pangeo pillars; 
+and then a narrative. 
+
+**pangeo**
+
+- Foster collaboration around the open source scientific python ecosystem for ocean / atmosphere / land / climate science
+- Support the development with domain-specific geoscience packages
+- Improve scalability of these tools to handle petabyte-scale datasets on HPC and cloud platforms 
+
+
+The latter is where much of the horsepower is focused today. As this has become a reality -- including pangeo 
+instances -- the opportunity to build the community and support domain-specific package development has grown 
+more acute (not to be obtuse). So as a Researcher we state the following axiomatic position...
+
 
 - I want to work in a Jupyter notebook...
   - ...in fact a JupyterLab notebook which is a feature-rich extension
   - ...that is hosted in a JupyterHub environment
 - I want to operate on some fairly large remote sensing datasets...
-  - ...to produce some non-trivial results; and the tools to produce them
+  - ...to produce some non-trivial results; and produce those tools I built and used to produce them!
   - Example: TenByGolive: 10 scalar fields (including acceleration) over large glaciated regions (400 km x 400 km)
   - Example: Synoptic: Ocean state data from several disparate sources including MODIS
   
-## What are these companies: GitHub? Binder? CircleCI? 
+## What are these companies: Anaconda? GitHub? Binder? CircleCI? 
 
 - A company that hosts public repos under the git system: Organized by individual (me) or organization
 - A company that will host a limited-duration executable instance of a Jupyter notebook GitHub repo
@@ -44,12 +57,8 @@ and *how* the pangeo environment comes together. To build the context, this narr
             - % conda list
             - % conda env export -f environment.yml
 
-Meanwhile same folder jupyterlab-workspace.json supports jupyterlab. 
-
-Meanwhile the postBuild script has the stuff to extend jupyter notebook to jupyter lab
-
-repo2docker will read these files and create the docker image with all this stuff. 
-
-hubploy calls the repo2docker api. 
-
-hubploy is called by circle.ci
+- same folder jupyterlab-workspace.json supports jupyterlab. 
+- the postBuild script has the stuff to extend jupyter notebook to jupyter lab
+- repo2docker will read these files and create the docker image with all this stuff. 
+- hubploy calls the repo2docker api. 
+- hubploy is called by circle.ci
