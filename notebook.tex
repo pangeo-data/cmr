@@ -1,0 +1,2233 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{golive3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{golive3}{%
+\section{golive3}\label{golive3}}
+
+Extend the number of path/row elements out to eight, all with the same
+UTM lat/lon zone. (Otherwise coordinates will start getting crossed.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{o}{!}pip install utm
+         \PY{o}{!}pip install pygeotools
+         
+         \PY{k+kn}{import} \PY{n+nn}{timeit}
+         \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{timedelta}\PY{p}{,} \PY{n}{datetime}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{netCDF4}
+         \PY{k+kn}{import} \PY{n+nn}{xarray} \PY{k}{as} \PY{n+nn}{xr}
+         \PY{k+kn}{import} \PY{n+nn}{dask}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{n}
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{signal} \PY{k}{import} \PY{n}{medfilt} \PY{k}{as} \PY{n}{mf}
+         \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{randint} \PY{k}{as} \PY{n}{ri}
+         
+         \PY{k+kn}{from} \PY{n+nn}{ipywidgets} \PY{k}{import} \PY{o}{*}                \PY{c+c1}{\PYZsh{} interactivity}
+         \PY{k+kn}{from} \PY{n+nn}{traitlets} \PY{k}{import} \PY{n}{dlink}             \PY{c+c1}{\PYZsh{} interactivity}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{utm}
+         
+         \PY{c+c1}{\PYZsh{} from osgeo import gdal }
+         \PY{c+c1}{\PYZsh{} from pygeotools.lib import iolib,timelib}
+         
+         \PY{k+kn}{import} \PY{n+nn}{golive\PYZus{}utility} \PY{k}{as} \PY{n+nn}{g}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: utm in /opt/conda/lib/python3.6/site-packages
+\textcolor{ansi-yellow}{You are using pip version 9.0.1, however version 19.0.3 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+Requirement already satisfied: pygeotools in /opt/conda/lib/python3.6/site-packages
+Requirement already satisfied: scipy in /opt/conda/lib/python3.6/site-packages (from pygeotools)
+Requirement already satisfied: gdal in /opt/conda/lib/python3.6/site-packages (from pygeotools)
+Requirement already satisfied: matplotlib in /opt/conda/lib/python3.6/site-packages (from pygeotools)
+Requirement already satisfied: numpy in /opt/conda/lib/python3.6/site-packages (from pygeotools)
+Requirement already satisfied: cycler>=0.10 in /opt/conda/lib/python3.6/site-packages (from matplotlib->pygeotools)
+Requirement already satisfied: kiwisolver>=1.0.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib->pygeotools)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib->pygeotools)
+Requirement already satisfied: python-dateutil>=2.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib->pygeotools)
+Requirement already satisfied: six in /opt/conda/lib/python3.6/site-packages (from cycler>=0.10->matplotlib->pygeotools)
+Requirement already satisfied: setuptools in /opt/conda/lib/python3.6/site-packages (from kiwisolver>=1.0.1->matplotlib->pygeotools)
+\textcolor{ansi-yellow}{You are using pip version 9.0.1, however version 19.0.3 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+
+    \end{Verbatim}
+
+    \hypertarget{utm-zone-stuff}{%
+\subsubsection{UTM zone stuff}\label{utm-zone-stuff}}
+
+Coordinates are Paths 60, 61, 62, 63, 64, 65 x Rows 17 and 18. However
+the \texttt{x} and \texttt{y} coordinates are degenerate from one to
+another when the UTM zone changes, specifically in longitude. This we
+can pull from a dataset using this function:
+
+\begin{verbatim}
+def GetMeridian(ds):
+    pstring = ds.input_image_details.attrs['image1_proj_WKT']
+    locale = pstring.find('central_meridian')
+    return int(pstring[locale+18:locale+22])
+
+print(GetMeridian(dataset))
+\end{verbatim}
+
+Using this on some exemplary data files shows that a block of eight
+path-row frames lie within the same UTM zone (meridian -141).
+
+\begin{verbatim}
+    65 17       64 17       63 17       62 17
+
+              64 18       63 18       62 18       61 18
+\end{verbatim}
+
+This extends the \textbf{golive2} notebook by a factor of 8 without
+running afoul of coordinate ambiguity. The following cell uses
+\texttt{wget} to pull the respective data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+        if False:
+            \PYZsh{} This takes about three minutes per path\PYZhy{}row frame
+            \PYZsh{}   Pull NetCDF files from the GoLIVE ftp server; by path\PYZhy{}row frames
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p065\PYZus{}r017/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p064\PYZus{}r018/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p064\PYZus{}r017/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p063\PYZus{}r018/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p063\PYZus{}r017/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p062\PYZus{}r018/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p062\PYZus{}r017/*.nc
+            !wget \PYZhy{}P /home/jovyan/data/golive3 ftp://dtn.rc.colorado.edu/work/nsidc0710/nsidc0710\PYZus{}landsat8\PYZus{}golive\PYZus{}ice\PYZus{}velocity\PYZus{}v1.1/p061\PYZus{}r018/*.nc
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 3 µs, sys: 0 ns, total: 3 µs
+Wall time: 6.44 µs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         
+         \PYZsh{} because the files are redundant: Use the data directory for the golive3 as the source 
+         golive3\PYZus{}d = g.SetDataDirectory(\PYZsq{}golive3\PYZsq{})
+         
+         tslist = []
+         
+         sourceFiles = golive3\PYZus{}d + \PYZsq{}L8*016\PYZus{}2014*.nc\PYZsq{}
+         \PYZsh{} sourceFiles = golive3\PYZus{}d + \PYZsq{}L8*.nc\PYZsq{}
+         
+         def pp(d):
+             global tslist
+             s = d[\PYZsq{}image\PYZus{}pair\PYZus{}times\PYZsq{}].attrs[\PYZsq{}mid\PYZus{}date\PYZsq{}]
+             ts = pd.Timestamp(s)
+             while ts in tslist: ts += timedelta(hours = 1)
+             tslist.append(ts)
+             d[\PYZsq{}time\PYZsq{}] = xr.Variable(\PYZsq{}time\PYZsq{}, [ts])
+             return d
+         
+         \PYZsh{} This next line \PYZsq{}works\PYZsq{} but breaks the kernel when using the entire source dataset. My guess is that 
+         \PYZsh{}   2000\PYZhy{}plus files are too much metadata for xarray to deal with in memory (let alone the data of course).
+         \PYZsh{}   For the sake of getting it to work a data subset can be selected for example with 
+         \PYZsh{}     sourceFiles = golive3\PYZus{}d + \PYZsq{}L8*016\PYZus{}2014*.nc\PYZsq{}
+         \PYZsh{}   where the wildcards give 75 files, less than the 255 from golive2; then we have
+         \PYZsh{}
+         \PYZsh{} ds = xr.open\PYZus{}mfdataset(sourceFiles, preprocess = pp, decode\PYZus{}cf = False, autoclose = True, concat\PYZus{}dim=\PYZsq{}time\PYZsq{})
+         \PYZsh{} 
+         \PYZsh{} Whereas a more ambitious idea would be to preserve the time axis entire in dask chunks
+         \PYZsh{}   There are 2103 source files and time becomes the first axis. sqrt(1e6/2103) is about 22 so... 
+         if False:
+             ds = xr.open\PYZus{}mfdataset(sourceFiles, preprocess = pp, decode\PYZus{}cf = False, \PYZbs{}
+                                autoclose = True, concat\PYZus{}dim=\PYZsq{}time\PYZsq{})
+             \PYZsh{} ds.vv\PYZus{}masked[0].plot(figsize=(12,8), cmap=plt.cm.rainbow, vmin=0., vmax=4.)
+             ds
+         
+         \PYZsh{} focus on the interesting part of the image...
+         \PYZsh{} plt.xlim(480000,570000)
+         \PYZsh{} plt.ylim(6630000,6694000)
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 62 µs, sys: 26 µs, total: 88 µs
+Wall time: 94.2 µs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{if} \PY{k+kc}{False}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} print(tslist)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{open\PYZus{}mfdataset(etc) yielded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tslist}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{vv}\PY{o}{=}\PY{n}{ds}\PY{o}{.}\PY{n}{vv\PYZus{}masked}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{p}{)}
+            \PY{n}{lgo}\PY{o}{=}\PY{n}{ds}\PY{o}{.}\PY{n}{lgo\PYZus{}mask}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{p}{)}
+            \PY{n}{vv}\PY{o}{.}\PY{n}{to\PYZus{}netcdf}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/golive3/go\PYZus{}vv\PYZus{}16day\PYZus{}2014.nc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{lgo}\PY{o}{.}\PY{n}{to\PYZus{}netcdf}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/golive3/go\PYZus{}lgo\PYZus{}16day\PYZus{}2014.nc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{if} \PY{k+kc}{True}\PY{p}{:}
+            \PY{n}{vvds}\PY{o}{=}\PY{n}{xr}\PY{o}{.}\PY{n}{open\PYZus{}dataset}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/golive3/go\PYZus{}vv\PYZus{}16day\PYZus{}2014.nc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{vv}\PY{o}{=}\PY{n}{vvds}\PY{o}{.}\PY{n}{vv\PYZus{}masked}
+            \PY{n}{lgods}\PY{o}{=}\PY{n}{xr}\PY{o}{.}\PY{n}{open\PYZus{}dataset}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/golive3/go\PYZus{}lgo\PYZus{}16day\PYZus{}2014.nc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{lgo}\PY{o}{=}\PY{n}{lgods}\PY{o}{.}\PY{n}{lgo\PYZus{}mask}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{if} \PY{k+kc}{True}\PY{p}{:} 
+            \PY{n+nb}{type}\PY{p}{(}\PY{n}{vv}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{vv}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} This thread was abandoned}
+            \PY{c+c1}{\PYZsh{} nvalues = 75*1361*1773}
+            \PY{c+c1}{\PYZsh{} vvcount = int(vv.count())}
+            \PY{c+c1}{\PYZsh{} count\PYZus{}nodata = int(vv.where(vv.data == \PYZhy{}9999.0).count())}
+            \PY{c+c1}{\PYZsh{} print(vvcount, count\PYZus{}nodata, vvcount + count\PYZus{}nodata, nvalues)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<xarray.DataArray 'vv\_masked' (time: 75, y: 1361, x: 1773)>
+[180978975 values with dtype=float32]
+Coordinates:
+  * time     (time) datetime64[ns] 2014-01-10 2014-01-10T01:00:00 {\ldots} 2015-01-06
+  * x        (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+  * y        (y) float64 6.537e+06 6.538e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+Attributes:
+    grid\_mapping:   transverse\_mercator
+    standard\_name:  speed\_masked
+    long\_name:      magnitude of velocity (masked)
+    units:          m/d
+    masking\_info:   masked\_where(((del\_corr\_arr<0.100)\&(corr\_arr<1.000))|(cor{\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{vv\PYZus{}mean1} \PY{o}{=} \PY{n}{vv}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{vv}\PY{o}{.}\PY{n}{data} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9999.}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{vv\PYZus{}mean\PYZus{}q} \PY{o}{=} \PY{n}{vv}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{vv}\PY{o}{.}\PY{n}{data} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9999.0}\PY{p}{)}
+        \PY{n}{vv\PYZus{}mean\PYZus{}q1} \PY{o}{=} \PY{n}{vv\PYZus{}mean\PYZus{}q}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{vv\PYZus{}mean\PYZus{}q1}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} (0, 1361, 1773)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{vv\PYZus{}mean2} \PY{o}{=} \PY{n}{vv\PYZus{}mean1}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/xarray/core/nanops.py:162: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis=axis, dtype=dtype)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{if} \PY{k+kc}{False}\PY{p}{:}
+             \PY{n}{vv\PYZus{}mean2}\PY{o}{.}\PY{n}{to\PYZus{}netcdf}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/golive3/go\PYZus{}2014\PYZus{}16day\PYZus{}mean.nc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{vv\PYZus{}mean2}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} (1361, 1773)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{vv\PYZus{}mean2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plt.xlim(220000,490000)}
+         \PY{c+c1}{\PYZsh{} plt.ylim(6700000,6970000)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <matplotlib.collections.QuadMesh at 0x7f1391874240>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{lgo1}\PY{o}{=}\PY{n}{lgo}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{lgo}\PY{o}{.}\PY{n}{data} \PY{o}{\PYZlt{}} \PY{l+m+mf}{2.}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/ipykernel/\_\_main\_\_.py:1: RuntimeWarning: invalid value encountered in less
+  if \_\_name\_\_ == '\_\_main\_\_':
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{lgo2}\PY{o}{=}\PY{n}{lgo1}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{lgo3}\PY{o}{=}\PY{n}{lgo2}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{lgo2}\PY{o}{.}\PY{n}{data} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.8}\PY{p}{)}         \PY{c+c1}{\PYZsh{} becomes a mask: Not ocean, at least 20\PYZpc{} votes for glacier ice}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/xarray/core/nanops.py:162: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis=axis, dtype=dtype)
+/opt/conda/lib/python3.6/site-packages/ipykernel/\_\_main\_\_.py:2: RuntimeWarning: invalid value encountered in less
+  from ipykernel import kernelapp as app
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{lgo3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.collections.QuadMesh at 0x7f138f76f198>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{vv\PYZus{}mean3}\PY{o}{=}\PY{n}{vv\PYZus{}mean2}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{lgo3}\PY{o}{.}\PY{n}{data} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/ipykernel/\_\_main\_\_.py:1: RuntimeWarning: invalid value encountered in greater\_equal
+  if \_\_name\_\_ == '\_\_main\_\_':
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{vv\PYZus{}mean3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.collections.QuadMesh at 0x7f138f712ac8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{if} \PY{k+kc}{False}\PY{p}{:}
+             \PY{n}{xHi} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{dims}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+             \PY{n}{yHi} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{dims}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+             \PY{n}{n0} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{data}
+             \PY{n}{n1} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{y}\PY{p}{[}\PY{n}{yHi}\PY{p}{]}\PY{o}{.}\PY{n}{data}
+             \PY{n}{e0} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{data}
+             \PY{n}{e1} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{n}{xHi}\PY{p}{]}\PY{o}{.}\PY{n}{data}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{e0}\PY{p}{,} \PY{n}{e1}\PY{p}{,} \PY{n}{n0}\PY{p}{,} \PY{n}{n1}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{utm}\PY{o}{.}\PY{n}{to\PYZus{}latlon}\PY{p}{(}\PY{n}{e0}\PY{p}{,} \PY{n}{n0}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{utm}\PY{o}{.}\PY{n}{to\PYZus{}latlon}\PY{p}{(}\PY{n}{e1}\PY{p}{,} \PY{n}{n0}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{utm}\PY{o}{.}\PY{n}{to\PYZus{}latlon}\PY{p}{(}\PY{n}{e0}\PY{p}{,} \PY{n}{n1}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{utm}\PY{o}{.}\PY{n}{to\PYZus{}latlon}\PY{p}{(}\PY{n}{e1}\PY{p}{,} \PY{n}{n1}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{ls\PYZus{}slope}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} simple least squares fit slope (degree 1)\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{ls\PYZus{}offset}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} simple least squares fit offset (degree 0)\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}slope}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{dim}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} x = Pixel value, y = a vector containing the date, dim == dimension}
+             \PY{n}{DS1} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{apply\PYZus{}ufunc}\PY{p}{(}
+                 \PY{n}{ls\PYZus{}slope}\PY{p}{,} \PY{n}{x} \PY{p}{,} \PY{n}{y}\PY{p}{,}
+                 \PY{n}{input\PYZus{}core\PYZus{}dims}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{dim}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{dim}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{vectorize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                 \PY{n}{dask}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{parallelized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{output\PYZus{}dtypes}\PY{o}{=}\PY{p}{[}\PY{n+nb}{float}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{)}
+             \PY{k}{return} \PY{n}{DS1}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}intercept}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{dim}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{DS2} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{apply\PYZus{}ufunc}\PY{p}{(}
+                 \PY{n}{ls\PYZus{}offset}\PY{p}{,} \PY{n}{x} \PY{p}{,} \PY{n}{y}\PY{p}{,}
+                 \PY{n}{input\PYZus{}core\PYZus{}dims}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{dim}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{dim}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{vectorize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                 \PY{n}{dask}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{parallelized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{output\PYZus{}dtypes}\PY{o}{=}\PY{p}{[}\PY{n+nb}{float}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{)}
+             \PY{k}{return} \PY{n}{DS2}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Remove \PYZhy{}9999.0 values from the vv DataArray (here they become nan)}
+         \PY{n}{vvnan} \PY{o}{=} \PY{n}{vv}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{vv}\PY{o}{.}\PY{n}{data} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.}\PY{p}{)}
+         
+         \PY{n}{vvds}\PY{o}{=}\PY{n}{vvnan}\PY{o}{.}\PY{n}{to\PYZus{}dataset}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{vvds}\PY{p}{)}
+         \PY{n}{vvds}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/ipykernel/\_\_main\_\_.py:2: RuntimeWarning: invalid value encountered in greater\_equal
+  from ipykernel import kernelapp as app
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<xarray.Dataset>
+Dimensions:     (time: 75, x: 1773, y: 1361)
+Coordinates:
+  * time        (time) datetime64[ns] 2014-01-10 {\ldots} 2015-01-06
+  * x           (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+  * y           (y) float64 6.537e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+Data variables:
+    speedfield  (time, y, x) float32 nan nan nan nan nan {\ldots} nan nan nan nan nan
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} array([[[nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 {\ldots},
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan]],
+         
+                [[nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 {\ldots},
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan]],
+         
+                [[nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 {\ldots},
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan]],
+         
+                {\ldots},
+         
+                [[nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 {\ldots},
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan]],
+         
+                [[nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 {\ldots},
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan]],
+         
+                [[nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 {\ldots},
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan],
+                 [nan, nan, nan, {\ldots}, nan, nan, nan]]], dtype=float32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{vvds}\PY{o}{.}\PY{n}{speedfield}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{6710000.}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{500000.}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.3805175         nan 0.45239696        nan 0.15132774        nan
+        nan 0.19357407        nan 0.05995712        nan        nan
+        nan        nan        nan 3.3384483         nan        nan
+        nan        nan        nan        nan 0.29603022        nan
+        nan 0.25648597        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.3377338         nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Scott configures the source dataset as time\PYZhy{}series 2D spatial array of (in time) noisy linear trends}
+         \PY{k}{if} \PY{k+kc}{False}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Give each pixel a different set of noise}
+             \PY{n}{nt}\PY{p}{,} \PY{n}{ny}\PY{p}{,} \PY{n}{nx} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}
+             \PY{n}{images} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{n}{ny}\PY{p}{,}\PY{n}{nx}\PY{p}{,}\PY{n}{nt}\PY{p}{]}\PY{p}{)}
+             \PY{n}{values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nt}\PY{p}{)}
+             \PY{n}{noise} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{[}\PY{n}{ny}\PY{p}{,}\PY{n}{nx}\PY{p}{,}\PY{n}{nt}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} NOTE: more slope variability:}
+             \PY{c+c1}{\PYZsh{}cube = (images*values*noise).T}
+             \PY{c+c1}{\PYZsh{} alternatively:}
+             \PY{n}{cube} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{images}\PY{o}{*}\PY{n}{values}\PY{p}{)} \PY{o}{+} \PY{n}{noise}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+             \PY{c+c1}{\PYZsh{}time = pd.date\PYZus{}range(start=\PYZsq{}1950\PYZhy{}01\PYZhy{}01\PYZsq{}, periods=nt, freq=\PYZsq{}10D\PYZsq{})}
+             \PY{n}{time} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nt}\PY{p}{)}
+             \PY{n}{DA} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{DataArray}\PY{p}{(}\PY{n}{da}\PY{o}{.}\PY{n}{from\PYZus{}array}\PY{p}{(}\PY{n}{cube}\PY{p}{,} \PY{n}{chunks}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{nx}\PY{p}{,} \PY{n}{ny}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{dims}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{coords}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{time}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{DS} \PY{o}{=} \PY{n}{DA}\PY{o}{.}\PY{n}{to\PYZus{}dataset}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{field}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{DS}\PY{p}{)}
+             \PY{n}{DS}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{field}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{if} \PY{k+kc}{False}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} I would like a time axis that has decimal time in some familiar unit like 1 day. Why? }
+             \PY{c+c1}{\PYZsh{}   Because when I try to fit a line to the data it complains...}
+             \PY{c+c1}{\PYZsh{} Since our time range is 2013 to 2018 we will have values of a couple thousand days; }
+             \PY{c+c1}{\PYZsh{}   but that is pretty reasonable particularly when our data for speed are in meters per day.}
+             \PY{c+c1}{\PYZsh{} The first step is to choose some epoch; I used January 1 2013 as prior to all the GOLIVE data.}
+             \PY{c+c1}{\PYZsh{} With this epoch in hand we convert from datetime.datetime to np.datetime64.}
+             \PY{c+c1}{\PYZsh{} We then reference a datetime in the vvds Dataset, subtract the epoch and convert to (24\PYZhy{}hour) units}
+             \PY{n}{dtEpoch} \PY{o}{=} \PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2013}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{dt64Epoch} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{(}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2013}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ts} \PY{o}{=} \PY{p}{(}\PY{n}{vvds}\PY{o}{.}\PY{n}{time}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o}{\PYZhy{}} \PY{n}{dt64Epoch}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{timedelta64}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{ts}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{days from Jan 1 2013 to the first timestamp of the Dataset:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{vvds}\PY{o}{.}\PY{n}{time}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{vvds}\PY{o}{.}\PY{n}{coords}               \PY{c+c1}{\PYZsh{} notice time is datetime64; some with hours added to avoid collisions}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} Coordinates:
+           * time     (time) datetime64[ns] 2014-01-10 2014-01-10T01:00:00 {\ldots} 2015-01-06
+           * x        (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+           * y        (y) float64 6.537e+06 6.538e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{vvds}\PY{o}{.}\PY{n}{dims}            \PY{c+c1}{\PYZsh{} 75 source results x (spatial extent)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} Frozen(SortedKeysDict(\{'time': 75, 'x': 1773, 'y': 1361\}))
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{datetime64} \PY{k}{as} \PY{n}{dt64}\PY{p}{,} \PY{n}{timedelta64} \PY{k}{as} \PY{n}{td64}
+         \PY{k}{def} \PY{n+nf}{ETimeDDays}\PY{p}{(}\PY{n}{timeX}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{p}{(}\PY{n}{timeX} \PY{o}{\PYZhy{}} \PY{n}{dt64}\PY{p}{(}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2013}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{td64}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{vvds}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{ETimeDDays}\PY{p}{(}\PY{n}{atime}\PY{o}{.}\PY{n}{data}\PY{p}{)} \PY{k}{for} \PY{n}{atime} \PY{o+ow}{in} \PY{n}{vvds}\PY{o}{.}\PY{n}{time}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{vvds}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <xarray.Dataset>
+         Dimensions:     ()
+         Data variables:
+             speedfield  int64 10364397
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{vvds}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <xarray.Dataset>
+         Dimensions:     (time: 75, x: 1773, y: 1361)
+         Coordinates:
+           * time        (time) float64 374.0 374.0 376.0 381.0 {\ldots} 728.0 733.0 735.0
+           * x           (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+           * y           (y) float64 6.537e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+         Data variables:
+             speedfield  (time, y, x) float32 nan nan nan nan nan {\ldots} nan nan nan nan nan
+\end{Verbatim}
+            
+    \hypertarget{remarks}{%
+\subsubsection{Remarks}\label{remarks}}
+
+There are two types of \texttt{coordinates} in \texttt{xarray}:
+Dimension coordinates (1D, correspond precisely by name to their
+\texttt{dimension}, marked by an asterisk (*) as above; and
+non-dimension coordinates. These latter contain coordinate data but are
+not a dimension coordinate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} vvds.assign\PYZus{}coords(dtime=EpochTimeDecimalDays(vvds.time))}
+         \PY{c+c1}{\PYZsh{} vvds.dtime=vvds.time.}
+         \PY{c+c1}{\PYZsh{} print(dir(vvds.time[0].data))}
+         \PY{c+c1}{\PYZsh{} print(vvds.time[0].data)}
+         \PY{c+c1}{\PYZsh{} print(type(vvds.time[0].data))}
+         \PY{c+c1}{\PYZsh{} dir(vvds.time)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         
+         dsRob = vvds.chunk(chunks=\PYZob{}\PYZsq{}time\PYZsq{}:\PYZhy{}1, \PYZsq{}y\PYZsq{}:400, \PYZsq{}x\PYZsq{}:400\PYZcb{})
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 959 ms, sys: 0 ns, total: 959 ms
+Wall time: 958 ms
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{dsRob}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{timeseries} \PY{o}{=} \PY{n}{dsRob}\PY{o}{.}\PY{n}{speedfield}
+         \PY{n}{apoint} \PY{o}{=} \PY{n}{timeseries}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{6710000.}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{500000.}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{apoint}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{vvds}\PY{o}{.}\PY{n}{speedfield}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{6710000.}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{500000.}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} timeseries.plot()}
+         \PY{c+c1}{\PYZsh{} print(dsRob.speedfield.sel(y=6710000.,x=500000.,method=\PYZsq{}nearest\PYZsq{}).data)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<xarray.Dataset>
+Dimensions:     (time: 75, x: 1773, y: 1361)
+Coordinates:
+  * time        (time) float64 374.0 374.0 376.0 381.0 {\ldots} 728.0 733.0 735.0
+  * x           (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+  * y           (y) float64 6.537e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+Data variables:
+    speedfield  (time, y, x) float32 dask.array<shape=(75, 1361, 1773), chunksize=(75, 400, 400)> 
+
+dask.array<getitem, shape=(75,), dtype=float32, chunksize=(75,)>
+[       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.3805175         nan 0.45239696        nan 0.15132774        nan
+        nan 0.19357407        nan 0.05995712        nan        nan
+        nan        nan        nan 3.3384483         nan        nan
+        nan        nan        nan        nan 0.29603022        nan
+        nan 0.25648597        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.3377338         nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan]
+
+    \end{Verbatim}
+
+    \hypertarget{solve-ls-fit-here}{%
+\section{Solve LS fit here}\label{solve-ls-fit-here}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{y}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{6728488.}\PY{p}{,}\PY{l+m+mf}{517888.}
+         \PY{n}{lsvel} \PY{o}{=} \PY{n}{vvds}\PY{o}{.}\PY{n}{speedfield}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}
+         \PY{n}{lstime}\PY{p}{,} \PY{n}{lsx}\PY{p}{,} \PY{n}{lsy} \PY{o}{=} \PY{n}{vvds}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lsvel}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{lsvel}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{p}{)}\PY{p}{:} 
+                 \PY{n}{lsx}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{lstime}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{lsy}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{lsvel}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{p}{)}
+         \PY{n}{lsymf} \PY{o}{=} \PY{n}{mf}\PY{p}{(}\PY{n}{lsy}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{;} 
+         \PY{n}{fig}\PY{p}{,}\PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;} \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{axes}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time (days)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m / d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{signal (black) and median filter (red)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axes}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{lsx}\PY{p}{,} \PY{n}{lsy}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{axes}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{lsx}\PY{p}{,} \PY{n}{lsymf}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{lsx}\PY{p}{,} \PY{n}{lsymf}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;} \PY{n}{fitx}\PY{o}{=}\PY{p}{[}\PY{n}{lsx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{lsx}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{;} \PY{n}{fity}\PY{o}{=}\PY{p}{[}\PY{n}{fit}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{fitx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{fit}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{fitx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+         \PY{n}{axes}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fitx}\PY{p}{,} \PY{n}{fity}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fit0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{lsx}\PY{p}{,} \PY{n}{lsy}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;} \PY{n}{fitx0}\PY{o}{=}\PY{p}{[}\PY{n}{lsx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{lsx}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{;} \PY{n}{fity0}\PY{o}{=}\PY{p}{[}\PY{n}{fit0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{fit0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{fitx0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{fit0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{fit0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{fitx0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+         \PY{n}{axes}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fitx0}\PY{p}{,} \PY{n}{fity0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} [<matplotlib.lines.Line2D at 0x7f133fc755c0>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         
+         dsRob1 = get\PYZus{}slope(dsRob.time, dsRob, \PYZsq{}time\PYZsq{}).compute()
+         
+         \PYZsh{} def get\PYZus{}slope(x, y, dim=\PYZsq{}time\PYZsq{}):
+             \PYZsh{} x = Pixel value, y = a vector containing the date, dim == dimension
+             \PYZsh{} DS1 = xr.apply\PYZus{}ufunc(
+                 \PYZsh{} ls\PYZus{}slope, x , y,
+                 \PYZsh{} input\PYZus{}core\PYZus{}dims=[[dim], [dim]],
+                 \PYZsh{} vectorize=True, 
+                 \PYZsh{} dask=\PYZsq{}parallelized\PYZsq{},
+                 \PYZsh{} output\PYZus{}dtypes=[float],
+                 \PYZsh{} )
+             \PYZsh{} return DS1.rename(\PYZob{}\PYZsq{}speedfield\PYZsq{}:\PYZsq{}p0\PYZsq{}\PYZcb{})
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 7min 27s, sys: 1min 17s, total: 8min 45s
+Wall time: 6min 28s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{dsRob1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} <xarray.Dataset>
+         Dimensions:  (x: 1773, y: 1361)
+         Coordinates:
+           * x        (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+           * y        (y) float64 6.537e+06 6.538e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+         Data variables:
+             p0       (y, x) float64 nan nan nan nan nan nan {\ldots} nan nan nan nan nan nan
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{dsRob1}\PY{o}{.}\PY{n}{p0}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{6710000.}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{500000.}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+nan
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{p0}\PY{o}{=}\PY{n}{dsRob1}\PY{o}{.}\PY{n}{p0}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p0}\PY{p}{)}
+         \PY{n}{p0}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{)} \PY{c+c1}{\PYZsh{} , vmin=\PYZhy{}.001, vmax=0.001)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<xarray.DataArray 'p0' (y: 1361, x: 1773)>
+array([[nan, nan, nan, {\ldots}, nan, nan, nan],
+       [nan, nan, nan, {\ldots}, nan, nan, nan],
+       [nan, nan, nan, {\ldots}, nan, nan, nan],
+       {\ldots},
+       [nan, nan, nan, {\ldots}, nan, nan, nan],
+       [nan, nan, nan, {\ldots}, nan, nan, nan],
+       [nan, nan, nan, {\ldots}, nan, nan, nan]])
+Coordinates:
+  * x        (x) float64 2.2e+05 2.203e+05 2.206e+05 {\ldots} 7.513e+05 7.516e+05
+  * y        (y) float64 6.537e+06 6.538e+06 6.538e+06 {\ldots} 6.945e+06 6.945e+06
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} <matplotlib.collections.QuadMesh at 0x7efd68716400>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{p0}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{6700000.}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{500000.}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+nan
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} dsScott = DS.chunk(chunks=\PYZob{}\PYZsq{}time\PYZsq{}:\PYZhy{}1, \PYZsq{}lat\PYZsq{}:3, \PYZsq{}lon\PYZsq{}:2\PYZcb{})}
+         \PY{c+c1}{\PYZsh{} dsScott1 = get\PYZus{}slope(dsScott.time, dsScott, \PYZsq{}time\PYZsq{}).compute()}
+         
+         \PY{c+c1}{\PYZsh{} Get intercept as well}
+         \PY{c+c1}{\PYZsh{} dsScott2 = get\PYZus{}intercept(dsScott.time, dsScott, \PYZsq{}time\PYZsq{}).compute()}
+         
+         \PY{c+c1}{\PYZsh{} Can merge these into a single datasets}
+         \PY{c+c1}{\PYZsh{} R = xr.merge([dsScott1,dsScott2])}
+         
+         \PY{c+c1}{\PYZsh{} Plot the results to make sure things look okay}
+         \PY{c+c1}{\PYZsh{} So to plot points and line:}
+         \PY{c+c1}{\PYZsh{} def plot\PYZus{}pixel(x=0,y=0):}
+         \PY{c+c1}{\PYZsh{}     data = dsScott[\PYZsq{}field\PYZsq{}].isel(dict(lon=x,lat=y)).compute()}
+             \PY{c+c1}{\PYZsh{}print(data)}
+         \PY{c+c1}{\PYZsh{}     coef = R.isel(dict(lon=x,lat=y)).to\PYZus{}array().values}
+             \PY{c+c1}{\PYZsh{}print(coef)}
+         \PY{c+c1}{\PYZsh{}     plt.title(f\PYZsq{}Lon=\PYZob{}x\PYZcb{} Lat=\PYZob{}y\PYZcb{}\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     plt.scatter(data.time.values, data.values, label=\PYZsq{}data\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     plt.plot(data.time.values, np.polyval(coef, data.time.values), label=\PYZsq{}fit\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     plt.legend()}
+         
+         \PY{c+c1}{\PYZsh{} plot\PYZus{}pixel(0,1)}
+         
+         \PY{c+c1}{\PYZsh{} dsScott1.p0.plot.imshow()}
+         \PY{c+c1}{\PYZsh{} plt.title(\PYZsq{}Slope map\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-41-957ddafb82ef> in <module>()
+    ----> 1 dsScott = DS.chunk(chunks=\{'time':-1, 'lat':3, 'lon':2\})
+          2 dsScott1 = get\_slope(dsScott.time, dsScott, 'time').compute()
+
+
+        NameError: name 'DS' is not defined
+
+    \end{Verbatim}
+
+    \hypertarget{learning-xarraydask-basics}{%
+\subsection{Learning xarray/dask
+basics}\label{learning-xarraydask-basics}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} This cell follows Scott Henderson\PYZsq{}s example to create a bunch of linear trends in time}
+        \PY{c+c1}{\PYZsh{}   across a 2D spatial grid, roughed up with a bit of noise.}
+        
+        \PY{n}{nt} \PY{o}{=} \PY{l+m+mi}{10}                                \PY{c+c1}{\PYZsh{} Ten elements in the time dimension}
+        \PY{n}{nx} \PY{o}{=} \PY{l+m+mi}{6}                                 \PY{c+c1}{\PYZsh{}     Six in the x}
+        \PY{n}{ny} \PY{o}{=} \PY{l+m+mi}{7}                                 \PY{c+c1}{\PYZsh{}     Seven in the y}
+        
+        \PY{n}{images} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{n}{ny}\PY{p}{,}\PY{n}{nx}\PY{p}{,}\PY{n}{nt}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} A 3D numpy array of ones: Fast index is time (10), slow is y (7)}
+        \PY{n}{values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nt}\PY{p}{)}                 \PY{c+c1}{\PYZsh{} A list[] of floats 0., 1., ..., 9.}
+        \PY{n}{noise} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{[}\PY{n}{ny}\PY{p}{,}\PY{n}{nx}\PY{p}{,}\PY{n}{nt}\PY{p}{]}\PY{p}{)}   \PY{c+c1}{\PYZsh{} A 3D numpy array of uniform random values on [0., 1.]}
+                                               \PY{c+c1}{\PYZsh{}   which would be indexed via [a, b, c]; not [a][b][c]}
+        
+        \PY{n}{cubeStart} \PY{o}{=} \PY{p}{(}\PY{n}{images}\PY{o}{*}\PY{n}{values}\PY{p}{)}            \PY{c+c1}{\PYZsh{} A 3D numpy array where the fast index (time) goes 0, 1, ..., 9}
+                                               \PY{c+c1}{\PYZsh{}   This uses \PYZsq{}broadcast multiplication\PYZsq{} element\PYZhy{}by\PYZhy{}element along}
+                                               \PY{c+c1}{\PYZsh{}   the fast (right\PYZhy{}most) index. What if values[] has length nx or ny? }
+                                               \PY{c+c1}{\PYZsh{}   Answer: This is no good, won\PYZsq{}t work. The broadcast list must match }
+                                               \PY{c+c1}{\PYZsh{}   the fast index in length.}
+        \PY{n}{cubeNext} \PY{o}{=} \PY{n}{cubeStart} \PY{o}{+} \PY{n}{noise}           \PY{c+c1}{\PYZsh{} Element\PYZhy{}by\PYZhy{}element addition of the [0, 1] noise tensor}
+        \PY{n}{cube} \PY{o}{=} \PY{n}{cubeNext}\PY{o}{.}\PY{n}{T}                      \PY{c+c1}{\PYZsh{} .T is Transpose: Now the fast index is time, then follows x, then y}
+        \PY{c+c1}{\PYZsh{} print(cubeStart)}
+        
+        \PY{c+c1}{\PYZsh{} hold cube2 in reserve for later: The idea of adding a new DataArray to an existing Dataset}
+        \PY{n}{cube2} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{images}\PY{o}{*}\PY{n}{values}\PY{p}{)} \PY{o}{+} \PY{n}{noise} \PY{o}{+} \PY{n}{noise} \PY{o}{+} \PY{n}{noise}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} import dask is necessary to work with dask.array objects }
+        \PY{n}{tlist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nt}\PY{p}{)}
+        \PY{n}{xlist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{nx}\PY{o}{*}\PY{l+m+mf}{2.}\PY{p}{,} \PY{l+m+mf}{2.}\PY{p}{)}
+        \PY{n}{ylist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{ny}\PY{o}{*}\PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{3.}\PY{p}{)}
+        \PY{n}{aDaskArray} \PY{o}{=} \PY{n}{dask}\PY{o}{.}\PY{n}{array}\PY{o}{.}\PY{n}{from\PYZus{}array}\PY{p}{(}\PY{n}{cube}\PY{p}{,} \PY{n}{chunks}\PY{o}{=}\PY{p}{(}\PY{n}{nt}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{aDaskArray}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        \PY{n}{aDaskArray}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{da} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{DataArray}\PY{p}{(}\PY{n}{aDaskArray}\PY{p}{,}
+                          \PY{n}{dims}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{coords}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{tlist}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{xlist}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ylist}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Describe the DataArray:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{da}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regarde: The data do not print; they just indicate a dask array:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{da}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{dads}\PY{o}{=}\PY{n}{da}\PY{o}{.}\PY{n}{to\PYZus{}dataset}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} dir(dads)          \PYZsh{} this gives a long listing that includes attrs, dims, coords, data\PYZus{}vars as elements of.}
+                             \PY{c+c1}{\PYZsh{}   We see these listed prominently when we print the Dataset. }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attributes:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{attrs}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coords:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{coords}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dimensions:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{dims}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data\PYZus{}vars:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{data\PYZus{}vars}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No append method in the data\PYZus{}vars:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{g}\PY{o}{.}\PY{n}{dirnou}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{data\PYZus{}vars}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{dv} \PY{o+ow}{in} \PY{n}{dads}\PY{o}{.}\PY{n}{data\PYZus{}vars}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{dv}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} print(type(dads.attrs))}
+        \PY{c+c1}{\PYZsh{} print(type(dads.coords))}
+        \PY{c+c1}{\PYZsh{} print(type(dads.dims))}
+        \PY{c+c1}{\PYZsh{} print(type(dads.data\PYZus{}vars))}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} To see the vast composition of a Dataset (state attributes and methods) use \PYZsq{}print(dir(dads))\PYZsq{}.}
+        \PY{c+c1}{\PYZsh{} The next cell elaborates all of this content for the dads Dataset.}
+\end{Verbatim}
+
+
+    \hypertarget{the-dataset-summarized}{%
+\subsubsection{The Dataset summarized}\label{the-dataset-summarized}}
+
+\texttt{print(dir(dads))} produces a vast list of state attributes and
+method attributes (110 of them!) These are sorted out here as an
+exercise in gaining familiarity with xarray Datasets. At the top level a
+Dataset is composed of four objects:
+
+\begin{itemize}
+\tightlist
+\item
+  An OrderedDict of attributes
+\item
+  Dataset coordinates: Analogous to a key:value Dictionary of
+  DataArrays.
+\item
+  Dataset dimensions (which are `Frozen')
+\item
+  DataVariables containing data distributed across some of these
+  dimensions, optionally using the coordinates
+\end{itemize}
+
+These four objects are instances of four classes; so each has its own
+attributes; and so on down into various weeds. At the moment we are
+interested in this high level of the \texttt{dads} Dataset: I indicate
+methods in what follows using \texttt{.method(arg{[}s{]})} with some
+examples.
+
+\hypertarget{related-terminology}{%
+\paragraph{Related terminology}\label{related-terminology}}
+
+\begin{itemize}
+\tightlist
+\item
+  Python Mapping is an important construct in the design of this
+  machinery (stub remark).
+\item
+  methods: method functions are declared within a class with an explicit
+  first argument representing that object (the Dataset) which is
+  provided implicitly by the method call; so the method has access to
+  the entirety of the Dataset object, referring to it as \texttt{self}.
+\item
+  \texttt{xr.DataArray} also has four components: \texttt{values},
+  \texttt{dims}, \texttt{coords}, and \texttt{attrs}. \texttt{dims} are
+  analogous to an \texttt{axis} in numpy. (A DataArray can also
+  optionally be assigned a \texttt{name}:
+  \texttt{fu\ =\ xr.DataArray(data=3,\ name=\textquotesingle{}bar\textquotesingle{})}.
+\item
+  \texttt{dask} builds graph representations for dynamic task scheduling
+  needed to perform out-of-core computations. It mimics \texttt{Pandas}
+  DataFrames by having its own DataFrames and likewise mimics the
+  \texttt{np.ndarray} via \texttt{dask.array}; with the user-crucial
+  addition of the concept of the chunk.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{rdata} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}                        \PY{c+c1}{\PYZsh{} a 2D ndarray of random values with dimensions as given}
+        \PY{n}{locs} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}                           \PY{c+c1}{\PYZsh{} three state abbreviations}
+        \PY{n}{times} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2000\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}      \PY{c+c1}{\PYZsh{} default period is 1 day }
+        \PY{n}{foo} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{DataArray}\PY{p}{(}\PY{n}{rdata}\PY{p}{,} \PY{n}{coords}\PY{o}{=}\PY{p}{[}\PY{n}{times}\PY{p}{,} \PY{n}{locs}\PY{p}{]}\PY{p}{,}      \PY{c+c1}{\PYZsh{} first argument is always the data}
+            \PY{n}{dims}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{space}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amelia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}          \PY{c+c1}{\PYZsh{} This name Amelia associates with the data, not the DataArray object}
+            \PY{n}{attrs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Here}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{We}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Include}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metatada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Attributes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{As a dictionary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+                           
+        \PY{n}{foo}\PY{o}{.}\PY{n}{attrs}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{throw in}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{some meters}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{foo} \PY{o}{=} \PY{n}{foo}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AmeliaB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}                         \PY{c+c1}{\PYZsh{} \PYZsq{}rename()\PYZsq{} returns a new DataArray without modifying foo}
+                                                            \PY{c+c1}{\PYZsh{}   so we re\PYZhy{}assign the new object to foo}
+        \PY{n}{foo}                                                 \PY{c+c1}{\PYZsh{} notice that \PYZsq{}rdata\PYZsq{} is not mentioned but AmeliaB is}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{fubar}\PY{o}{=}\PY{n}{foo}\PY{o}{.}\PY{n}{to\PYZus{}dataset}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{fubar1} \PY{o}{=} \PY{n}{foo}\PY{o}{.}\PY{n}{to\PYZus{}dataset}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yawlp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{fubar}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}                        \PY{c+c1}{\PYZsh{} The DataArray is broken apart in the \PYZsq{}time\PYZsq{} dimension to produce}
+                                                  \PY{c+c1}{\PYZsh{}   a series of Data variables in the Dataset (using time coordinates)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{fubar1}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} AmeliaB becomes yawlp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} from the fubar dataset with two coordinates \PYZsq{}space\PYZsq{} and \PYZsq{}time\PYZsq{}: We continue by adding both}
+        \PY{c+c1}{\PYZsh{}   some Data variables and some Coordinates (which in some cases add dimensions).}
+        
+        \PY{c+c1}{\PYZsh{} Add two Data variables}
+        \PY{n}{fubar}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{space}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        \PY{n}{fubar}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{space}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{5.}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Now change gears: What follows applies to coords and dims; this is no longer Data variable territory}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{} Add two coordinates that will be non\PYZhy{}dimensional}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{24.}\PY{p}{)}\PY{p}{)}               \PY{c+c1}{\PYZsh{} implicitly declares dimension latitude}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{18.}\PY{p}{)}\PY{p}{)}              \PY{c+c1}{\PYZsh{}   and longitude. Since these are not the}
+                                                                         \PY{c+c1}{\PYZsh{}   same as the coordinate names \PYZsq{}lat\PYZsq{} and \PYZsq{}lon\PYZsq{}}
+                                                                         \PY{c+c1}{\PYZsh{}   these coords are \PYZsq{}non\PYZhy{}dimension coordinates\PYZsq{}}
+        
+        
+        \PY{c+c1}{\PYZsh{} As there are not coords matching dims \PYZsq{}latitude\PYZsq{} and \PYZsq{}longitude\PYZsq{} they become \PYZsq{}dimensions without coordinates\PYZsq{}.}
+        \PY{c+c1}{\PYZsh{} \PYZsq{}time\PYZsq{} is another DWC as it was devalued when fubar was created with: fubar=foo.to\PYZus{}dataset(dim=\PYZsq{}time\PYZsq{}). }
+        \PY{c+c1}{\PYZsh{} Since this broke the AmeliaB data by time into multiple DataArrays there was no longer a time dimension.}
+        
+        
+        \PY{c+c1}{\PYZsh{} Add a coordinate that is dimensional, having coordinate name = dimension name}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{1.4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.5}                                         \PY{c+c1}{\PYZsh{} single value does not imply and therefore }
+                                                                         \PY{c+c1}{\PYZsh{}   fails to create dimension \PYZsq{}q2\PYZsq{}}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{moped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} multiple values imply and create dimension \PYZsq{}moped\PYZsq{}}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reference\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Timestamp}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014\PYZhy{}09\PYZhy{}05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}      \PY{c+c1}{\PYZsh{} Single value: No dimension implied}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{coords}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dope}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2000\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}    \PY{c+c1}{\PYZsh{} Multiple values: Dimension of same name implied}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Now change gears again: This is modification and addition to attrs}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{attrs}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{throwing in}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{another attribute}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{fubar}\PY{o}{.}\PY{n}{attrs}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Here}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is change! But do not fail to}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{fubar}
+\end{Verbatim}
+
+
+    \hypertarget{dataarray-attributes}{%
+\paragraph{DataArray attributes}\label{dataarray-attributes}}
+
+    \begin{itemize}
+\item
+  T no parens; Transpose by reversing order of dimensions
+\item
+  argmax
+\item
+  argmin
+\item
+  argsort
+\item
+  assign\_attrs
+\item
+  assign\_coords
+\item
+  astype
+\item
+  attrs
+\item
+  bfill
+\item
+  broadcast\_equals
+\item
+  chunk
+\item
+  chunks
+\item
+  clip
+\item
+  close
+\item
+  combine\_first
+\item
+  compute
+\item
+  conj
+\item
+  conjugate
+\item
+  coords
+\item
+  copy
+\item
+  count
+\item
+  cumprod
+\item
+  cumsum
+\item
+  data
+\item
+  diff
+\item
+  differentiate
+\item
+  dims
+\item
+  dot
+\item
+  drop
+\end{itemize}
+
+    \hypertarget{deal-with-nan-missing-values-in-a-ls-fit}{%
+\section{Deal with nan missing values in a LS
+fit}\label{deal-with-nan-missing-values-in-a-ls-fit}}
+
+\begin{itemize}
+\tightlist
+\item
+  xarray.DataArray is a labeled, multi-dimensional array
+
+  \begin{itemize}
+  \tightlist
+  \item
+    DataArray contents
+
+    \begin{itemize}
+    \tightlist
+    \item
+      values: a numpy.ndarray holding the array's values (in an
+      xr.Dataset these are Data variables)
+    \item
+      dims: dimension names for each axis (e.g., (`x', `y', `z'))
+    \item
+      coords: a dict-like container of arrays (coordinates) that label
+      each point
+
+      \begin{itemize}
+      \tightlist
+      \item
+        e.g.~1-dimensional arrays of numbers, datetime objects or
+        strings
+      \end{itemize}
+    \item
+      attrs: an OrderedDict to hold arbitrary metadata (attributes)
+    \item
+      name: optional string; the name for the data
+    \end{itemize}
+  \item
+    Creating a DataArray
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The DataArray constructor takes:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        data: a multi-dimensional array of values (e.g., a numpy
+        ndarray, Series, DataFrame or Panel)
+      \item
+        coords: a list or dictionary of coordinates.
+
+        \begin{itemize}
+        \tightlist
+        \item
+          If a list, it should be a list of tuples where
+
+          \begin{itemize}
+          \tightlist
+          \item
+            the first element is the dimension name and
+          \item
+            the second element is the corresponding coordinate
+            array\_like object
+          \end{itemize}
+        \end{itemize}
+      \item
+        dims: a list of dimension names. If omitted and coords is a list
+        of tuples, dimension names are taken from coords.
+      \item
+        attrs: a dictionary of attributes to add to the instance
+      \item
+        name: a string that names the instance
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  dropna(dim, how=`any', thresh=None)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Returns a new DataArray with dropped labels for missing values along
+    the provided dimension.
+  \item
+    dim is a string; the name of the dimension along which to drop
+    missing values.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Dropping along multiple dimensions simultaneously is not yet
+      supported
+    \item
+      how:\{`any', `all'\}, optional
+
+      \begin{itemize}
+      \tightlist
+      \item
+        any : if any NA values are present, drop that label
+      \item
+        all : if all values are NA, drop that label
+      \end{itemize}
+    \item
+      thresh:int, default None; if supplied, require this many non-NA
+      values
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{x}\PY{o}{=}\PY{n}{xr}\PY{o}{.}\PY{n}{DataArray}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{2.1}\PY{p}{,} \PY{l+m+mf}{3.9}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{l+m+mf}{10.}\PY{p}{,} \PY{l+m+mf}{12.1}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{coords}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waviness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} <xarray.DataArray 'fred' (waviness: 7)>
+         array([ 0. ,  2.1,  3.9,  nan,  nan, 10. , 12.1])
+         Coordinates:
+           * waviness  (waviness) int64 0 1 2 3 4 5 6
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{y}\PY{o}{=}\PY{n}{x}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waviness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{y}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <xarray.DataArray 'fred' (waviness: 5)>
+         array([ 0. ,  2.1,  3.9, 10. , 12.1])
+         Coordinates:
+           * waviness  (waviness) int64 0 1 2 5 6
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waviness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{waviness}\PY{p}{,} \PY{n}{x}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waviness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 2.0082089552238807
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{fit1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{waviness}\PY{p}{,} \PY{n}{x}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fit1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} nan
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s do a 2D array with a 3rd time axis and go for fits in that axis }
+          \PY{n}{nt} \PY{o}{=} \PY{l+m+mi}{10}                                \PY{c+c1}{\PYZsh{} Ten elements in the time dimension}
+          \PY{n}{nx} \PY{o}{=} \PY{l+m+mi}{6}                                 \PY{c+c1}{\PYZsh{}     Six in the x}
+          \PY{n}{ny} \PY{o}{=} \PY{l+m+mi}{7}                                 \PY{c+c1}{\PYZsh{}     Seven in the y}
+          \PY{n}{images} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{n}{ny}\PY{p}{,}\PY{n}{nx}\PY{p}{,}\PY{n}{nt}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} A 3D numpy array of ones: Fast index is time (10), slow is y (7)}
+          \PY{n}{values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{nt}\PY{o}{*}\PY{l+m+mf}{2.}\PY{p}{,} \PY{l+m+mf}{2.}\PY{p}{)}      \PY{c+c1}{\PYZsh{} A list[] of floats 0., 2., ..., 18.}
+          \PY{c+c1}{\PYZsh{} print(values) gives us 0., 2., ..., 18.}
+          
+          \PY{n}{noise} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{[}\PY{n}{ny}\PY{p}{,}\PY{n}{nx}\PY{p}{,}\PY{n}{nt}\PY{p}{]}\PY{p}{)}   \PY{c+c1}{\PYZsh{} A 3D numpy array of uniform random values on [0., 1.]}
+                                                 \PY{c+c1}{\PYZsh{}   which would be indexed via [a, b, c]; not [a][b][c]}
+          \PY{c+c1}{\PYZsh{} print(noise)}
+          
+          \PY{n}{cubeStart} \PY{o}{=} \PY{n}{images}\PY{o}{*}\PY{n}{values}              \PY{c+c1}{\PYZsh{} A 3D numpy array where the fast index (time) goes 0, 1, ..., 9}
+                                                 \PY{c+c1}{\PYZsh{}   This uses \PYZsq{}broadcast multiplication\PYZsq{} element\PYZhy{}by\PYZhy{}element along}
+                                                 \PY{c+c1}{\PYZsh{}   the fast (right\PYZhy{}most) index. What if values[] has length nx or ny? }
+                                                 \PY{c+c1}{\PYZsh{}   Answer: This is no good, won\PYZsq{}t work. The broadcast list must match }
+                                                 \PY{c+c1}{\PYZsh{}   the fast index in length.}
+          \PY{n}{cubeNext} \PY{o}{=} \PY{n}{cubeStart} \PY{o}{+} \PY{n}{noise}           \PY{c+c1}{\PYZsh{} Element\PYZhy{}by\PYZhy{}element addition of the [0, 1] noise tensor}
+          \PY{n}{cube} \PY{o}{=} \PY{n}{cubeNext}\PY{o}{.}\PY{n}{T}                      \PY{c+c1}{\PYZsh{} .T is Transpose: Now the fast index is time, then follows x, then y}
+          
+          \PY{c+c1}{\PYZsh{} print(cube.shape) gives (10,6,7)}
+          
+          \PY{n}{nNans} \PY{o}{=} \PY{l+m+mi}{6}\PY{o}{*}\PY{l+m+mi}{7}\PY{o}{*}\PY{l+m+mi}{7}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nNans}\PY{p}{)}\PY{p}{:}
+              \PY{n}{i1} \PY{o}{=} \PY{n}{ri}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}
+              \PY{n}{i2} \PY{o}{=} \PY{n}{ri}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+              \PY{n}{i3} \PY{o}{=} \PY{n}{ri}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+              \PY{n}{cube}\PY{p}{[}\PY{n}{i1}\PY{p}{,} \PY{n}{i2}\PY{p}{,} \PY{n}{i3}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+          
+          \PY{c+c1}{\PYZsh{} counter = np.zeros([6, 7])}
+          \PY{c+c1}{\PYZsh{} for i in range(7):}
+          \PY{c+c1}{\PYZsh{}     for j in range(6):}
+          \PY{c+c1}{\PYZsh{}         c = 0.}
+          \PY{c+c1}{\PYZsh{}         for k in range(10):}
+          \PY{c+c1}{\PYZsh{}             \PYZsh{} print(cube[k,j,i]) prints values or occasional nans}
+          \PY{c+c1}{\PYZsh{}             if np.isnan(cube[k,j,i]): c += 1.}
+          \PY{c+c1}{\PYZsh{}         counter[j, i] = c}
+          \PY{c+c1}{\PYZsh{} print(counter)}
+          
+          \PY{n}{dacube} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{DataArray}\PY{p}{(}\PY{n}{cube}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cubedata}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{coords}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{\PYZus{}calc\PYZus{}slope}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}wrapper that returns the slop from a linear regression fit of x and y\PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{c+c1}{\PYZsh{} return stats.linregress(x, y)[0]  \PYZsh{} extract slope only}
+              \PY{c+c1}{\PYZsh{} print(len(x), \PYZsq{}     \PYZsq{}, x, \PYZsq{}    \PYZsq{}, y)}
+              \PY{c+c1}{\PYZsh{} print(x, y)}
+              \PY{n}{idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+              \PY{n}{nFalse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{idx}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{idx}\PY{p}{)}
+              \PY{k}{if} \PY{p}{(}\PY{n}{nFalse} \PY{o}{\PYZgt{}} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{nFalse}\PY{p}{)}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{k}{def} \PY{n+nf}{linear\PYZus{}trend}\PY{p}{(}\PY{n}{obj}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} time\PYZus{}nums = xr.DataArray(obj[\PYZsq{}time\PYZsq{}].values.astype(np.float),}
+              \PY{c+c1}{\PYZsh{}                          dims=\PYZsq{}time\PYZsq{},}
+              \PY{c+c1}{\PYZsh{}                          coords=\PYZob{}\PYZsq{}time\PYZsq{}: obj[\PYZsq{}time\PYZsq{}]\PYZcb{},}
+              \PY{c+c1}{\PYZsh{}                          name=\PYZsq{}time\PYZus{}nums\PYZsq{})}
+              \PY{n}{trend} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{apply\PYZus{}ufunc}\PY{p}{(}\PY{n}{\PYZus{}calc\PYZus{}slope}\PY{p}{,} \PY{n}{obj}\PY{o}{.}\PY{n}{time}\PY{p}{,} \PY{n}{obj}\PY{p}{,}
+                                     \PY{n}{vectorize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                                     \PY{n}{input\PYZus{}core\PYZus{}dims}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                                     \PY{n}{output\PYZus{}core\PYZus{}dims}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                                     \PY{n}{output\PYZus{}dtypes}\PY{o}{=}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{float}\PY{p}{]}\PY{p}{,}
+                                     \PY{n}{dask}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{parallelized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{k}{return} \PY{n}{trend}
+          
+          \PY{c+c1}{\PYZsh{} lt = linear\PYZus{}trend(dacube.dropna(\PYZsq{}time\PYZsq{}))}
+          \PY{n}{lt} \PY{o}{=} \PY{n}{linear\PYZus{}trend}\PY{p}{(}\PY{n}{dacube}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{lt}\PY{p}{)}\PY{p}{)}
+          \PY{n}{lt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'xarray.core.dataarray.DataArray'>
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:} <matplotlib.collections.QuadMesh at 0x7fcec73d74e0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} print(cube)}
+         
+         \PY{n}{fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{nx}\PY{p}{,} \PY{n}{ny}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fit}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} array([6, 7])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{ls\PYZus{}slope}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} simple least squares fit slope (degree 1)\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} x = Pixel value, y = a vector containing the date, dim == dimension}
+            \PY{n}{DS1} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{apply\PYZus{}ufunc}\PY{p}{(}
+                \PY{n}{ls\PYZus{}slope}\PY{p}{,} \PY{n}{x} \PY{p}{,} \PY{n}{y}\PY{p}{,}
+                \PY{n}{input\PYZus{}core\PYZus{}dims}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{dim}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{dim}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                \PY{n}{vectorize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                \PY{n}{dask}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{parallelized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{output\PYZus{}dtypes}\PY{o}{=}\PY{p}{[}\PY{n+nb}{float}\PY{p}{]}\PY{p}{,}
+                \PY{p}{)}
+            \PY{k}{return} \PY{n}{DS1}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{lsslope}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+            \PY{n}{func} \PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{,} \PY{n}{d}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waviness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{waviness}\PY{p}{,} \PY{n}{x}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waviness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{xr}\PY{o}{.}\PY{n}{apply\PYZus{}ufunc}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<xarray.DataArray (x: 6, y: 7)>
+array([[1.999919, 1.993111, 1.957388, 1.979   , 1.96508 , 2.005614, 2.026176],
+       [2.038618, 2.049828, 1.959472, 1.92527 , 1.978245, 2.074708, 2.150724],
+       [1.94545 , 2.039683, 2.056257, 1.963589, 1.91542 , 1.946109, 2.015649],
+       [2.06676 , 1.911211, 2.07372 , 2.0151  , 2.016031, 1.966239, 2.041857],
+       [1.922687, 2.013023, 1.995124, 1.964978, 1.918803, 1.990436, 1.939823],
+       [2.023583, 1.94166 , 1.946586, 2.018105, 1.953038, 2.010427, 2.007586]])
+Coordinates:
+  * x        (x) int64 0 1 2 3 4 5
+  * y        (y) int64 0 1 2 3 4 5 6
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\item
+  dt
+\item
+  dtype
+\item
+  encoding
+\item
+  equals
+\item
+  expand\_dims
+\item
+  ffill
+\item
+  fillna
+\item
+  from\_cdms2
+\item
+  from\_dict
+\item
+  from\_iris
+\item
+  from\_series
+\item
+  get\_axis\_num
+\item
+  get\_index
+\item
+  groupby
+\item
+  groupby\_bins
+\item
+  identical
+\item
+  imag
+\item
+  indexes
+\item
+  interp
+\item
+  interp\_like
+\item
+  interpolate\_na
+\item
+  isin
+\item
+  isnull
+\item
+  item
+\item
+  load
+\item
+  loc
+\item
+  max
+\item
+  mean
+\item
+  median
+\item
+  min
+\item
+  name
+\item
+  nbytes
+\item
+  ndim
+\item
+  notnull
+\item
+  persist
+\item
+  pipe
+\item
+  plot
+\item
+  prod
+\item
+  quantile
+\item
+  rank
+\item
+  real
+\item
+  reduce
+\item
+  reindex
+\item
+  reindex\_like
+\item
+  rename
+\item
+  reorder\_levels
+\item
+  resample
+\item
+  reset\_coords
+\item
+  reset\_index
+\item
+  roll
+\item
+  rolling
+\item
+  round
+\item
+  searchsorted
+\item
+  set\_index
+\item
+  shape
+\item
+  shift
+\item
+  size
+\item
+  sizes
+\item
+  sortby
+\item
+  squeeze
+\item
+  stack
+\item
+  std
+\item
+  sum
+\item
+  swap\_dims
+\item
+  to\_cdms2
+\item
+  to\_dataframe
+\item
+  to\_dataset
+\item
+  to\_dict
+\item
+  to\_index
+\item
+  to\_iris()
+\item
+  to\_masked\_array()
+\item
+  to\_netcdf()
+\item
+  to\_pandas()
+\item
+  to\_series()
+\item
+  transpose()
+\item
+  unstack()
+\item
+  values()
+\item
+  var()
+\item
+  variable()
+\end{itemize}
+
+\#\#\#\# Also found in Dataset
+
+\begin{itemize}
+\tightlist
+\item
+  all()
+\item
+  any()
+\item
+  isel
+\item
+  isel\_points()
+\item
+  sel
+\item
+  sel\_points
+\item
+  where()
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    \hypertarget{continuing-with-dads-attributes-methods-and-state-variables}{%
+\subsubsection{\texorpdfstring{Continuing with \texttt{dads} attributes
+(methods and state
+variables)}{Continuing with dads attributes (methods and state variables)}}\label{continuing-with-dads-attributes-methods-and-state-variables}}
+
+\hypertarget{state-attributes-specific-to-this-particular-dads-dataset}{%
+\paragraph{\texorpdfstring{State attributes specific to this particular
+\emph{\texttt{dads}}
+Dataset}{State attributes specific to this particular dads Dataset}}\label{state-attributes-specific-to-this-particular-dads-dataset}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{tt,\ xx,\ yy} are both coordinates and dimensions within
+  \texttt{dads}. In this context they are \emph{coordinates}, not
+  \emph{dimensions}.
+\item
+  \texttt{speedfield} is a Data variable within \texttt{dads}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tt}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{dads} \PY{o+ow}{and} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{dads} \PY{c+c1}{\PYZsh{} prints True}
+\end{Verbatim}
+
+
+    \hypertarget{modify-dataset-structure}{%
+\paragraph{Modify Dataset structure}\label{modify-dataset-structure}}
+
+\begin{itemize}
+\tightlist
+\item
+  set\_coords(string or list of strings) migrates named Data variable(s)
+  into Coordinates
+\end{itemize}
+
+\hypertarget{selection-and-comparison-methods}{%
+\paragraph{Selection and comparison
+methods}\label{selection-and-comparison-methods}}
+
+\begin{itemize}
+\tightlist
+\item
+  where()
+\item
+  all()
+\item
+  any()
+\item
+  isel()
+\item
+  sel()
+\end{itemize}
+
+\hypertarget{format-and-file-methods}{%
+\paragraph{Format and file methods}\label{format-and-file-methods}}
+
+\begin{itemize}
+\tightlist
+\item
+  to\_array
+\item
+  to\_dask\_dataframe
+\item
+  to\_dataframe
+\item
+  to\_dict
+\item
+  to\_netcdf
+\item
+  to\_zarr
+\item
+  load
+\end{itemize}
+
+\hypertarget{dask.array-chunking}{%
+\paragraph{\texorpdfstring{\texttt{dask.array}
+chunking}{dask.array chunking}}\label{dask.array-chunking}}
+
+\begin{itemize}
+\tightlist
+\item
+  chunk
+\item
+  chunks
+\end{itemize}
+
+\hypertarget{four-categories-of-content-of-a-dataset-objects-with-their-own-attributes}{%
+\paragraph{four categories of content of a Dataset (objects with their
+own
+attributes)}\label{four-categories-of-content-of-a-dataset-objects-with-their-own-attributes}}
+
+\begin{itemize}
+\tightlist
+\item
+  .attrs
+\item
+  .coords
+\item
+  .data\_vars
+\item
+  .dims
+\end{itemize}
+
+\hypertarget{assessing-content}{%
+\paragraph{assessing content}\label{assessing-content}}
+
+\begin{itemize}
+\tightlist
+\item
+  count
+\end{itemize}
+
+\hypertarget{selecting-content}{%
+\paragraph{selecting content}\label{selecting-content}}
+
+\hypertarget{sir-not-yet-summarized-methods}{%
+\paragraph{Sir Not-yet-summarized
+methods}\label{sir-not-yet-summarized-methods}}
+
+\begin{itemize}
+\item
+  apply
+\item
+  argmax
+\item
+  argmin
+\item
+  argsort
+\item
+  assign
+\item
+  assign\_attrs
+\item
+  assign\_coords
+\item
+  astype
+\item
+  bfill
+\item
+  broadcast\_equals
+\item
+  clip
+\item
+  close
+\item
+  combine\_first
+\item
+  compute
+\item
+  conj
+\item
+  conjugate
+\item
+  copy
+\item
+  cumprod
+\item
+  cumsum
+\item
+  diff
+\item
+  differentiate
+\item
+  drop
+\item
+  dropna
+\item
+  dump\_to\_store
+\item
+  encoding
+\item
+  equals
+\item
+  expand\_dims
+\item
+  ffill
+\item
+  fillna
+\item
+  filter\_by\_attrs
+\item
+  from\_dataframe
+\item
+  from\_dict
+\item
+  get
+\item
+  get\_index
+\item
+  groupby
+\item
+  groupby\_bins
+\item
+  identical
+\item
+  imag
+\item
+  indexes
+\item
+  info
+\item
+  interp
+\item
+  interp\_like
+\item
+  interpolate\_na
+\item
+  isel\_points
+\item
+  isin
+\item
+  isnull
+\item
+  items
+\item
+  keys
+\item
+  load\_store
+\item
+  loc
+\item
+  max
+\item
+  mean
+\item
+  median
+\item
+  merge
+\item
+  min
+\item
+  nbytes
+\item
+  notnull
+\item
+  persist
+\item
+  pipe
+\item
+  prod
+\item
+  quantile
+\item
+  rank
+\item
+  real
+\item
+  reduce
+\item
+  reindex
+\item
+  reindex\_like
+\item
+  rename() will rename Data variables returning a new Dataset; not `in
+  place'
+\item
+  reorder\_levels
+\item
+  resample
+\item
+  reset\_coords
+\item
+  reset\_index
+\item
+  roll
+\item
+  rolling
+\item
+  round
+\item
+  sel\_points
+\item
+  set\_index
+\item
+  shift
+\item
+  sizes
+\item
+  sortby
+\item
+  squeeze
+\item
+  stack
+\item
+  std
+\item
+  sum
+\item
+  swap\_dims() swaps a dimensional for a non-dimensional coordinate
+\item
+  transpose
+\item
+  unstack
+\item
+  update
+\item
+  values
+\item
+  var
+\item
+  variables
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} In top down order: }
+        \PY{c+c1}{\PYZsh{}   We have a \PYZsq{}data array data set\PYZsq{} dads: DataSet(One DataArray named \PYZsq{}speedfield\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}     This has a \PYZsq{}tt\PYZsq{} dimension and an associated \PYZsq{}tt\PYZsq{} coordinate. }
+        \PY{c+c1}{\PYZsh{}     The \PYZsq{}tt\PYZsq{} coordinate is a DataArray with 10 int64 values}
+        \PY{c+c1}{\PYZsh{}     Using the .data extension to this the coordinate gives an np.ndarray.}
+        \PY{c+c1}{\PYZsh{}     This prints as a space\PYZhy{}delimited array (not a comma\PYZhy{}delimited list)}
+        \PY{c+c1}{\PYZsh{}     At need it could be converted to a list using .tolist()}
+        \PY{c+c1}{\PYZsh{} }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the tt coordinate data type is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{o}{.}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the tt coordinate data describes itself:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the tt coordinate self\PYZhy{}identifies as:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type of the tt coordinate is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{converting the coordinate data to a list:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} The dads Dataset itself has just the one Data variable \PYZsq{}speedfield\PYZsq{}.}
+        \PY{c+c1}{\PYZsh{}   This is also a DataArray; indexed by three dimensional indices}
+        \PY{c+c1}{\PYZsh{}   }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dads Dataset:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dads.speedfield has type:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield with indices 1, 2, 3 (tt, xx, yy) is a DataArray:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{speedfield data value at same:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{float}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(speedfield with indices 10, 2, 3 (tt, xx, yy) fails with dimension 0 out of bounds)}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{dads}\PY{o}{.}\PY{n}{speedfield}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} print(\PYZsq{}speedfield along the x axis:\PYZbs{}n\PYZsq{}, float(dads.speedfield[1,:,3]))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{30.}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{;} \PY{n+nb}{print}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{dads}\PY{o}{.}\PY{n}{tt}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{s} \PY{o}{=} \PY{n}{vvds}\PY{o}{.}\PY{n}{speedfield}\PY{o}{.}\PY{n}{sel}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{6710000.}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{500000.}\PY{p}{,}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{data}
+         \PY{n}{s}\PY{o}{.}\PY{n}{shape}
+         
+         \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{75.}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{s}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.  3.  6.  9. 12. 15. 18. 21. 24. 27.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-45-df8d94db6b68> in <module>()
+          1 y=np.arange(0.,30.,3); print(y)
+    ----> 2 np.polyfit(dads.tt.data, y, 1)
+          3 
+          4 s = vvds.speedfield.sel(y=6710000.,x=500000.,method='nearest').data
+          5 s.shape
+
+
+        NameError: name 'dads' is not defined
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{dads1} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{Dataset}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tempo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}  \PY{n}{temp}\PY{p}{)}\PY{p}{,}
+           \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{:}                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precipitation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{precip}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,}
+           \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{:}                 \PY{n}{coords}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lon}\PY{p}{)}\PY{p}{,}
+           \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{:}                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lat}\PY{p}{)}\PY{p}{,}
+           \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{:}                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014\PYZhy{}09\PYZhy{}06}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+           \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{:}                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reference\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{Timestamp}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014\PYZhy{}09\PYZhy{}05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
