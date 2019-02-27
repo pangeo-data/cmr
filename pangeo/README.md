@@ -41,7 +41,7 @@ pangeo depends on services provided at no cost
 - ***CircleCI*** executes a task sequence in a self-hosted container in response to an API call
 
 
-## What is the pangeo deployment narrative? 
+## Context 2: pangeo deployment narrative 
 
 - I create a Kubernetes cluster **KC** 
   - This is represented by a head node and a capacity plan: For spinning up additional cloud resources
