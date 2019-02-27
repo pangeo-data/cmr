@@ -29,6 +29,7 @@ Now here is an axiomatic view... and then we carry on with tactics
   - A pangeo JupyterHub 
   - Proper authentication/security
   
+  
 ## Context 1: Companies Anaconda, GitHub, Binder, CircleCI
 
 
@@ -43,39 +44,51 @@ pangeo depends on services provided at no cost
 
 ## Context 2: pangeo deployment narrative 
 
-- I create a Kubernetes cluster **KC** 
-  - This is represented by a head node and a capacity plan: For spinning up additional cloud resources
-- We have a GitHub organization *pangeo-data* and a repo *pangeo-cloud-federation* 
+- I create a Kubernetes cluster **KC** for latent processing power 
+  - A head node is always on at minimal cost
+  - The cluster has capacity rules: For spinning up additional public cloud instances (VMs)
+  - When scientists are authenticated onto the system they can start tasks that spin up resources
+  - When the system goes idle the resources are de-allocated; back to a quiescent state
+  
+  
+- There is a GitHub organization *pangeo-data* and a repo *pangeo-cloud-federation* 
   - This repo will be responsible for multiple pangeo JupyterHub instances
-    - Two exist ('**Alpha**' and '**Bravo**') and I wish to add '**Charlie**'
-    - I Fork the entire repo to my own GitHub account; working in the `staging` branch
-      - ...and I clone this fork to my local computer for ease of modification; I will push commits directly to the fork
-    - In the `deployments` folder I go from **Alpha** to a new pangeo instance **Charlie**: By copying the **Alpha** folder
-      - In **Charlie** I go to the `image` folder which represents my work environment
-        - Note there are folders `config`, `image`, `secrets` and 'README.md`
-        - In `image` the folders are `.dask` and `binder` plus `.ipynb` files, `.gitignore` and `README.md`
-          - `.dask` contains `config.yaml` which describes a kubernetes dask worker... 
-          - This is cloud-vendor agnostic
-        - It is possible to invent the `image` contents out of whole cloth; for example pulling from another repo
-          - With Scott we pulled from [this esip tech dive repo](https://github.com/scottyhq/esip-tech-dive)
-          - This overwrite of the default content did not include copying `.git` or `.gitignore`
-          - Then be sure to modify `README.md`
-        - Moving from `/image` to `/binder` we find environment configuration material
+    - Two exist ('**Alpha**' and '**Bravo**') and we will add '**Charlie**'
+    - I Fork this repo to my GitHub account; where I work in the `staging` branch
+    - I Clone this Fork to my local machine (easier to modify) 
+      - I will `push` commits to my Fork; and then do Pull Requests to the main repo
+    - In `deployments`: Use **Alpha** as a basis for **Charlie**: By copying the **Alpha** folder
+      - Note there are sub-folders `config`, `image`, `secrets` and there is a 'README.md`
+      - In **Charlie** I go to the `image` folder which represents the scientist's working environment
+        - In `image` the sub-folders are `.dask` and `binder` plus files `XXX.ipynb`, `.gitignore` and `README.md`
+          - `.dask` contains `config.yaml` which describes a kubernetes dask worker 
+            - This is cloud-vendor agnostic
+            - This applies to the scientist's "log in" container...
+              - ... ***AND*** equally to any dask workers that are spun up in response to a big task request
+            - In `environment.yml` the Python environment is described: See below under the `/binder` folder
+          - One can  build the `image` folder content out of whole cloth
+            - For example: Pull from another repo
+              - Such as from [this ESIP tech dive repo](https://github.com/scottyhq/esip-tech-dive)
+              - Overwrite default content without including `.git`, `.gitignore`
+              - Be sure to modify `README.md` appropriately
+        - Moving now from the `/image` folder to the `/binder` folder: Environment configuration
           - `apt.txt` installs additional Linux packages
-          - `environment.yml` is the conda packages to install
-          - How do we generate this file from some environment?
-            - % conda activate esip-tech-dive
-            - % conda list
-            - % conda env export -f environment.yml
+          - `environment.yml` lists conda packages to install
+            - How do we generate this file from some environment?
+              - `% conda activate esip-tech-dive`
+              - `% conda list`
+              - `% conda env export -f environment.yml`
+              - DESCRIBE how `jupyterlab-workspace.json` supports jupyterlab 
+                - TRANSLATE "the postBuild script therein extends jupyter notebook to jupyter lab"
 
-- same folder jupyterlab-workspace.json supports jupyterlab. 
-- the postBuild script has the stuff to extend jupyter notebook to jupyter lab
+#### How a PR triggers the build
+- ELABORATE How CircleCI is fired off
 - repo2docker will read these files and create the docker image with all this stuff. 
 - hubploy calls the repo2docker api. 
 - hubploy is called by circle.ci
 
 
-# Notes on hubploy / pangeo builder
+# Context 3: Tactics of building a pangeo instance
 
 
 * [hubploy on github](https://github.com/yuvipanda/hubploy)
