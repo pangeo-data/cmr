@@ -1,4 +1,4 @@
-# Outreach: Draft articulation of how pangeo works
+# How pangeo works
 
 I am a Researcher; so *why* do I want to work in the pangeo environment? 
 And *how* does the pangeo environment come together? Notes to build context and skills: 
