@@ -62,3 +62,10 @@ more acute (not to be obtuse). So as a Researcher we state the following axiomat
 - repo2docker will read these files and create the docker image with all this stuff. 
 - hubploy calls the repo2docker api. 
 - hubploy is called by circle.ci
+
+
+# Notes on hubploy / pangeo builder
+
+```
+% aws eks update-kubeconfig --name $CLUSTER_NAME
+```
