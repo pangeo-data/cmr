@@ -51,7 +51,7 @@ pangeo depends on services provided at no cost
   - When the system goes idle the resources are de-allocated; back to a quiescent state
   
   
-- There is a GitHub organization *pangeo-data* and a repo *pangeo-cloud-federation* 
+- There is a GitHub organization *pangeo-data* and a repo [*pangeo-cloud-federation*](https://github.com/Element84/pangeo-deployment) 
   - This repo will be responsible for multiple pangeo JupyterHub instances
     - Two exist ('**Alpha**' and '**Bravo**') and we will add '**Charlie**'
     - I Fork this repo to my GitHub account; where I work in the `staging` branch
