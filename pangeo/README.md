@@ -33,13 +33,14 @@ Now here is an axiomatic view... and then we carry on with tactics
 ## Context 1: Companies Anaconda, GitHub, Binder, CircleCI
 
 
-pangeo depends on services provided at no cost
+pangeo depends on services/tech provided at no cost
 
 
 - ***Anaconda*** builds and maintains a Python package manager called `conda`
 - ***Github*** hosts public repos under the git system: Organized by individual (me) or organization
 - ***Binder*** hosts a limited-duration executable instance of a Jupyter notebook GitHub repo
 - ***CircleCI*** executes a task sequence in a self-hosted container in response to an API call
+- ***Docker*** is containers, images, stuff like that
 
 
 ## Context 2: pangeo deployment narrative 
@@ -55,16 +56,32 @@ pangeo depends on services provided at no cost
   - This repo will be responsible for multiple pangeo JupyterHub instances
     - Two exist ('**Alpha**' and '**Bravo**') and we will add '**Charlie**'
     - I Fork this repo to my GitHub account; where I work in the `staging` branch
-    - I Clone this Fork to my local machine (easier to modify) 
-      - I will `push` commits to my Fork; and then do Pull Requests to the main repo
-    - In `deployments`: Use **Alpha** as a basis for **Charlie**: By copying the **Alpha** folder
-      - Note there are sub-folders `config`, `image`, `secrets` and there is a 'README.md`
-      - In **Charlie** I go to the `image` folder which represents the scientist's working environment
-        - In `image` the sub-folders are `.dask` and `binder` plus files `XXX.ipynb`, `.gitignore` and `README.md`
-          - `.dask` contains `config.yaml` which describes a kubernetes dask worker 
-            - This is cloud-vendor agnostic
-            - This applies to the scientist's "log in" container...
-              - ... ***AND*** equally to any dask workers that are spun up in response to a big task request
+      - I can also `git clone` my Fork to a local machine (easier to modify) 
+        - I `push` commits up to the Fork
+      - I do Pull Requests from my Fork to the pangeo source repo
+
+
+> ***PRO TIP:*** The pangeo JupyterHub spins up a container where I do my Jupyter Notebooking... so that's fine but
+> suppose I decide to fire off a task that uses `dask` (big processing job say): Pangeo will spin me up `dask workers`
+> that are clones of my current working environment. Therefore if I customize my current working environment I risk
+> breaking this system which depends on that clone pattern. Therefore I do not log in to pangeo and start running
+> `conda install NetworkX` willy-nilly. It can be done; but it is just asking for trouble. 
+
+
+The narrative continues...
+    
+    - In the `deployments` folder: I create folder `Charlie` as a copy of folder `Alpha`.
+      - Here are sub-folders `config`, `image`, `secrets` and there is `README.md`.
+      - In `Charlie/image` I have a representation of the scientists' working environment
+        - `Charlie/image` can be built from scratch (rather than as a copy of `Alpha/image`
+        - `Charlie/image/XXX.ipynb` files will be pre-populsted into the container environment
+        - `Charlie/image` also contains `.gitignore` and `README.md`
+        - `Charlie/image/.dask` is a folder containing `config.yaml`: Describes a kubernetes dask worker
+          - Intended to be cloud-vendor agnostic
+          - ...is also the Users container environment where they can for example build Jupyter notebooks
+          
+          
+        - `Charlie/image/binder` 
             - In `environment.yml` the Python environment is described: See below under the `/binder` folder
           - One can  build the `image` folder content out of whole cloth
             - For example: Pull from another repo
