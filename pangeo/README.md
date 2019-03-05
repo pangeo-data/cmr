@@ -1,9 +1,17 @@
 # How pangeo works
 
 I am a Researcher; so *why* do I want to work in the pangeo environment? 
-And *how* does the pangeo environment come together? Notes to build context and skills: 
+And *how* does the pangeo environment come together? Notes to build context and skills.
+
+
+(The short answer is: You want a JupyterLab environment available to your community of scientists 
+that is (a) always available online (b) cost-effective (c) loaded with the packages, tools and tech
+you need for your research (d) connected to vast data resources in the public cloud and (e) at a 
+moments notice is capable of transforming into a compute cluster to do larger calculations quickly.)
+
 
 **pangeo pillars of existence**
+
 
 - Foster collaboration around the open source scientific python ecosystem for ocean / atmosphere / land / climate science
 - Support the development with domain-specific geoscience packages
@@ -74,16 +82,19 @@ with a bunch of `dask` workers running on the kubernetes cluster.
 
 The narrative continues...
 
-
-    - Delta build: In the `deployments` folder: I create folder `Delta` as a copy of folder `Bravo`.
+- From the pangeo-data organization
+  - From the pangeo-cloud-federation repo (Fork) we have a folder called `deployments`
+    - Delta build: In the `deployments` folder I create folder `Delta` as a copy of folder `Bravo`.
       - Here are sub-folders `config`, `image`, `secrets` and there are files `README.md` and `hubploy.yaml`.
-        - In practice you customize all contents of `Delta` and then do the PR to create the `Delta` pangeo JupyterHub
+        - In practice you customize all contents of `Delta` 
+        - Then do a PR to build the `Delta` pangeo JupyterHub
       - `Delta/image` represents the scientists' working environment. It could be built from scratch as well...
         - For example: Pull from another repo
           - Such as from [this ESIP tech dive repo](https://github.com/scottyhq/esip-tech-dive)
           - Overwrite default content without including `.git`, `.gitignore`
           - Modify `README.md` 
-        - `Delta/image/notebooks` contains `xxx.ipynb` notebooks files that will be pre-populated into the container environment
+        - `Delta/image/notebooks` contains `xxx.ipynb` notebooks files
+          - These will be pre-populated into the container environment
         - `Delta/image/binder` contains...
           - `apt.txt`: additional Linux packages to pre-install
           - `environment.yml` listing conda packages to pre-install
