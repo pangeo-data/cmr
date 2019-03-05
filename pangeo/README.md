@@ -54,7 +54,7 @@ pangeo depends on services/tech provided at no cost
 ## Context 2: pangeo deployment narrative 
 
 - Someone creates a Kubernetes cluster **KC**, a latent resource of processing power
-  - This is a cloud resource that can be shared by multiple pangeo instances as described below
+  - This is a cloud resource that can be shared by multiple pangeo instances ('deployments') as described below
   - A head node is always on at minimal cost; and then other machines spin up / down based on demand
   - The cluster has capacity rules: For spinning up additional public cloud instances (VMs)
   - When scientists are authenticated onto the system they can start tasks that spin up resources
@@ -72,15 +72,16 @@ repo [*pangeo-cloud-federation*](https://github.com/pangeo-data/pangeo-cloud-fed
       - I do Pull Requests from my Fork to the `pangeo-cloud-federation` repo
 
 
-> ***PRO TIP:*** The pangeo JupyterHub spins up a container where I do my Jupyter Notebooking... so that's fine but
-suppose I decide to fire off a task that uses `dask` (big processing job say): Pangeo will spin me up `dask workers`
-that are clones of my current working environment. Therefore if I customize my current working environment I risk
-breaking this system which depends on that clone pattern. Therefore I do not log in to pangeo and start running
-`conda install NetworkX` willy-nilly. It can be done; but it that customized environment will not be compatible
-with a bunch of `dask` workers running on the kubernetes cluster. 
+> ***PRO TIP:*** The pangeo JupyterHub provides a container environment where I develop Jupyter Notebooks... 
+So far so good. Now suppose I fire off some task that makes use of `dask` (perhaps a big processing job). 
+Pangeo will allocate `dask workers` that are clones of my default container environment. So I can modify
+that environment for example using `conda install` but this may make my environment incompatible with the
+`dask` worker clones. To maintain that compatibility we modify the configuration of the pangeo deployment; 
+and then redeploy it. pangeo is designed to be redeployed easily so that this process is not painful. 
 
 
 The narrative continues...
+
 
 - From the pangeo-data organization
   - From the pangeo-cloud-federation repo (Fork) we have a folder called `deployments`
