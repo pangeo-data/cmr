@@ -65,17 +65,17 @@ repo [*pangeo-cloud-federation*](https://github.com/pangeo-data/pangeo-cloud-fed
 
 
 > ***PRO TIP:*** The pangeo JupyterHub spins up a container where I do my Jupyter Notebooking... so that's fine but
-> suppose I decide to fire off a task that uses `dask` (big processing job say): Pangeo will spin me up `dask workers`
-> that are clones of my current working environment. Therefore if I customize my current working environment I risk
-> breaking this system which depends on that clone pattern. Therefore I do not log in to pangeo and start running
-> `conda install NetworkX` willy-nilly. It can be done; but it that customized environment will not be compatible
-> with a bunch of `dask workers` running on the kubernetes cluster. 
+suppose I decide to fire off a task that uses `dask` (big processing job say): Pangeo will spin me up `dask workers`
+that are clones of my current working environment. Therefore if I customize my current working environment I risk
+breaking this system which depends on that clone pattern. Therefore I do not log in to pangeo and start running
+`conda install NetworkX` willy-nilly. It can be done; but it that customized environment will not be compatible
+with a bunch of `dask` workers running on the kubernetes cluster. 
 
 
 The narrative continues...
-    
-    
-    - **Delta** build: In the `deployments` folder: I create folder `Delta` as a copy of folder `Bravo`.
+
+
+    - Delta build: In the `deployments` folder: I create folder `Delta` as a copy of folder `Bravo`.
       - Here are sub-folders `config`, `image`, `secrets` and there are files `README.md` and `hubploy.yaml`.
         - In practice you customize all contents of `Delta` and then do the PR to create the `Delta` pangeo JupyterHub
       - `Delta/image` represents the scientists' working environment. It could be built from scratch as well...
@@ -103,7 +103,7 @@ The narrative continues...
       - `Delta/README.md` is the usual thing
       - `Delta/hubploy.yaml` is also not documented here yet; relegated to section 3 below 
       
-Now that this is all 'completed' the PR to `pangeo-data/pangeo-cloud-federation` is sufficient to start 
+Now that this is all "completed" the PR to `pangeo-data/pangeo-cloud-federation` is sufficient to start 
 the deployment in motion. 
 
 
