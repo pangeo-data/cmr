@@ -38,7 +38,7 @@ Now here is an axiomatic view... and then we carry on with tactics
   - Proper authentication/security
   
   
-## Context 1: Companies Anaconda, GitHub, Binder, CircleCI
+## Context 1: Companies Anaconda, GitHub, Binder, CircleCI, Docker
 
 
 pangeo depends on services/tech provided at no cost
