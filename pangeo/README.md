@@ -45,61 +45,71 @@ pangeo depends on services/tech provided at no cost
 
 ## Context 2: pangeo deployment narrative 
 
-- I create a Kubernetes cluster **KC** for latent processing power 
-  - A head node is always on at minimal cost
+- Someone creates a Kubernetes cluster **KC**, a latent resource of processing power
+  - This is a cloud resource that can be shared by multiple pangeo instances as described below
+  - A head node is always on at minimal cost; and then other machines spin up / down based on demand
   - The cluster has capacity rules: For spinning up additional public cloud instances (VMs)
   - When scientists are authenticated onto the system they can start tasks that spin up resources
   - When the system goes idle the resources are de-allocated; back to a quiescent state
   
   
-- There is a GitHub organization *pangeo-data* and a repo [*pangeo-cloud-federation*](https://github.com/Element84/pangeo-deployment) 
-  - This repo will be responsible for multiple pangeo JupyterHub instances
-    - Two exist ('**Alpha**' and '**Bravo**') and we will add '**Charlie**'
-    - I Fork this repo to my GitHub account; where I work in the `staging` branch
+- There is a GitHub organization *pangeo-data* and a 
+repo [*pangeo-cloud-federation*](https://github.com/pangeo-data/pangeo-cloud-federation)
+  - This repo is supported by a separate [pangeo deployment repo](https://github.com/Element84/pangeo-deployment)
+  - The *federation* repo will be causal for multiple pangeo JupyterHub instances
+    - Abstractly: Suppose three exist, `Alpha`, `Bravo` and `Charlie` and we wish to add `Delta`
+    - I Fork the `pangeo-cloud-federation` repo to my GitHub account; where I will work in the `staging` branch
       - I can also `git clone` my Fork to a local machine (easier to modify) 
         - I `push` commits up to the Fork
-      - I do Pull Requests from my Fork to the pangeo source repo
+      - I do Pull Requests from my Fork to the `pangeo-cloud-federation` repo
 
 
 > ***PRO TIP:*** The pangeo JupyterHub spins up a container where I do my Jupyter Notebooking... so that's fine but
 > suppose I decide to fire off a task that uses `dask` (big processing job say): Pangeo will spin me up `dask workers`
 > that are clones of my current working environment. Therefore if I customize my current working environment I risk
 > breaking this system which depends on that clone pattern. Therefore I do not log in to pangeo and start running
-> `conda install NetworkX` willy-nilly. It can be done; but it is just asking for trouble. 
+> `conda install NetworkX` willy-nilly. It can be done; but it that customized environment will not be compatible
+> with a bunch of `dask workers` running on the kubernetes cluster. 
 
 
 The narrative continues...
     
-    - In the `deployments` folder: I create folder `Charlie` as a copy of folder `Alpha`.
-      - Here are sub-folders `config`, `image`, `secrets` and there is `README.md`.
-      - In `Charlie/image` I have a representation of the scientists' working environment
-        - `Charlie/image` can be built from scratch (rather than as a copy of `Alpha/image`
-        - `Charlie/image/XXX.ipynb` files will be pre-populsted into the container environment
-        - `Charlie/image` also contains `.gitignore` and `README.md`
-        - `Charlie/image/.dask` is a folder containing `config.yaml`: Describes a kubernetes dask worker
-          - Intended to be cloud-vendor agnostic
-          - ...is also the Users container environment where they can for example build Jupyter notebooks
-          
-          
-        - `Charlie/image/binder` 
-            - In `environment.yml` the Python environment is described: See below under the `/binder` folder
-          - One can  build the `image` folder content out of whole cloth
-            - For example: Pull from another repo
-              - Such as from [this ESIP tech dive repo](https://github.com/scottyhq/esip-tech-dive)
-              - Overwrite default content without including `.git`, `.gitignore`
-              - Be sure to modify `README.md` appropriately
-        - Moving now from the `/image` folder to the `/binder` folder: Environment configuration
-          - `apt.txt` installs additional Linux packages
-          - `environment.yml` lists conda packages to install
+    
+    - **Delta** build: In the `deployments` folder: I create folder `Delta` as a copy of folder `Bravo`.
+      - Here are sub-folders `config`, `image`, `secrets` and there are files `README.md` and `hubploy.yaml`.
+        - In practice you customize all contents of `Delta` and then do the PR to create the `Delta` pangeo JupyterHub
+      - `Delta/image` represents the scientists' working environment. It could be built from scratch as well...
+        - For example: Pull from another repo
+          - Such as from [this ESIP tech dive repo](https://github.com/scottyhq/esip-tech-dive)
+          - Overwrite default content without including `.git`, `.gitignore`
+          - Modify `README.md` 
+        - `Delta/image/notebooks` contains `xxx.ipynb` notebooks files that will be pre-populated into the container environment
+        - `Delta/image/binder` contains...
+          - `apt.txt`: additional Linux packages to pre-install
+          - `environment.yml` listing conda packages to pre-install
             - How do we generate this file from some environment?
               - `% conda activate esip-tech-dive`
               - `% conda list`
               - `% conda env export -f environment.yml`
               - DESCRIBE how `jupyterlab-workspace.json` supports jupyterlab 
-                - TRANSLATE "the postBuild script therein extends jupyter notebook to jupyter lab"
+              - TRANSLATE "the postBuild script therein extends jupyter notebook to jupyter lab   
+        - `Delta/image/.dask`
+          - contains `config.yaml` describing a kubernetes dask worker
+            - Intended to be cloud-vendor agnostic
+            - This is also the Users container environment where they can for example build Jupyter notebooks
+        - `Delta/image` also contains some files: `LICENSE.TXT`, `Welcome.md`, maybe some logos etcetera
+      - `Delta/config` contains some `.yaml` files: Copied from `Bravo`, no changes.
+      - `Delta/secrets` is authentication material; not covered at this time
+      - `Delta/README.md` is the usual thing
+      - `Delta/hubploy.yaml` is also not documented here yet; relegated to section 3 below 
+      
+Now that this is all 'completed' the PR to `pangeo-data/pangeo-cloud-federation` is sufficient to start 
+the deployment in motion. 
+
 
 #### How a PR triggers the build
-- ELABORATE How CircleCI is fired off
+
+- ELABORATE How CircleCI is triggered and what it does
 - repo2docker will read these files and create the docker image with all this stuff. 
 - hubploy calls the repo2docker api. 
 - hubploy is called by circle.ci
