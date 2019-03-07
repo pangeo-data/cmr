@@ -1,13 +1,20 @@
 # How pangeo works
 
 I am a Researcher; so *why* do I want to work in the pangeo environment? 
-And *how* does the pangeo environment come together? Notes to build context and skills.
+And *how* does the pangeo environment come together? These notes help you the Researcher
+understand **pangeo** the geoscience platform. 
 
 
-(The short answer is: You want a JupyterLab environment available to your community of scientists 
+The quick answer is: You may want a JupyterLab environment available to your community of scientists 
 that is (a) always available online (b) cost-effective (c) loaded with the packages, tools and tech
 you need for your research (d) connected to vast data resources in the public cloud and (e) at a 
-moments notice is capable of transforming into a compute cluster to do larger calculations quickly.)
+moment's notice is capable of expanding into a compute cluster to do large calculations quickly.
+
+
+If you **do** want this: Look for a pangeo deployment to join and use. **OR** if it makes sense to
+invest the time and effort you can deploy your own. This as you might imagine is a bigger undertaking; 
+and it may involve paying for supporting resources on the public cloud.
+
 
 
 **pangeo pillars of existence**
