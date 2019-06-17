@@ -1,4 +1,4 @@
-# icesat2https://icesat-2.gsfc.nasa.gov/icesat-2-data
+# [icesat2](https://icesat-2.gsfc.nasa.gov)
 
 Notes from the [Icesat-2](https://icesat-2.gsfc.nasa.gov) hackweek at UW June 17 - 21 2019. 
 While NASA-Goddard is managing the mission the Icesat2 data products are
