@@ -23,19 +23,30 @@ the data hence my Jupyter-local copy.
 * download all results; choose direct download; Download Data button
 * Order status page: Click on **View/Download Data Links** to get a list of granule URLs
 * Copy this list of URLs; transfer to a text file (I edit from the Jupyter terminal using `vi`)
-  * prepend `wget` on each line
-  * append `--user user --password pass`
-    * Please take care not to commit this file to a git repo if it contains a working password
-  * source the file: This pulls in `100MB x n_files` files
+  * Each line of this file will be a `wget` command in this format:
   
-This places a bunch of data files (`.h5`) in the Jupyter pod. Nothing up to this point has touched on the Amazon Web Services
-public cloud. The next step writes data to an S3 bucket. Either you will be able to write the data across using the AWS
-command line or you won't. In the latter case the probable cause involves authentication keys, not covered here. 
+```
+wget https://n5eil...etcetera.h5 --user <username> --password <password><space>
+```
+  * The `<space>` is simply a trailing space character 
+  * Hence to build this script file: 
+    * prepend `wget` on each line 
+    * append `--user user --password pass ` (note trailing space)
+    * ***Pro Tip: Take care not to commit this file to a git repo as it contains a working password***
+  * run the file using `source <scriptfile>`. This will pull in the data files to the current working directory
+  
+
+The above procedure writes data files (`.h5`) into the Jupyter pod. Nothing up to this point has touched the 
+AWS (Amazon Web Services) public cloud. The next step writes data to an S3 bucket. Either you will be able to write 
+the data across using the AWS command line or you won't. In the latter case the probable cause involves authentication 
+keys, not covered here. 
 
 * In the Jupyter terminal go to the directory that contains the data to copy to the cloud
-* identify an S3 bucket for the data to land in. 
-  * It need not include the folder path; that will be created automatically
-* run:
+* Identify the S3 bucket where the data is to be sent
+* Identify the folder path *within* that S3 bucket
+  * This need not exist yet; it will be created automatically during transfer
+  * For this example the bucket is `pangeo-data-upload-oregon` and the folder is `icesat2/juneauicefield`
+* Now issue this command...
 
 ```
 aws s3 sync ./ s3://pangeo-data-upload-oregon/icesat2/juneauicefield
