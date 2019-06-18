@@ -15,7 +15,9 @@ on the AWS cloud. This could be consolidated to a single step straight to the cl
 the data hence my Jupyter-local copy. 
 
 * go to the [NSIDC icesat2 data portal](https://nsidc.org/data/icesat-2/products)
-* go to the **earthdata** browser (sign in)
+* left sidebar: ICESAT2 Datasets
+* in the table: ATL06 link
+* **earthdata Search** link (sign in)
 * use the map interface to outline a polygon (last click on first click marker to close)
   * a region the size of the Juneau icefield gave about 60 granules
 * choose a direct download
