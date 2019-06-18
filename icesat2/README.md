@@ -21,22 +21,28 @@ the data hence my Jupyter-local copy.
 * use the map interface to outline a polygon (last click on first click marker to close)
   * a region the size of the Juneau icefield gave about 60 granules
 * download all results; choose direct download; Download Data button
-* Order status page: Click on **View/Download Data Links** to get a list of granule URLs
-* Copy this list of URLs; transfer to a text file (I edit from the Jupyter terminal using `vi`)
-  * Each line of this file will be a `wget` command in this format:
+* Order status page
+* Method A, Best
+  * Click on **Download Script File**
+  * Upload the script file to the Jupyter environment using the upload button
+  * Run the script in the Jupyter environment (it will prompt for your password just once)
+* Method B, Not Best
+  * Click on **View/Download Data Links** to get a list of granule URLs
+  * Copy this list of URLs; transfer to a text file (I edit from the Jupyter terminal using `vi`)
+    * Each line of this file will be a `wget` command in this format:
   
 ```
 wget https://n5eil...etcetera.h5 --user <username> --password <password><space>
 ```
-  * The `<space>` is simply a trailing space character 
-  * Hence to build this script file: 
-    * prepend `wget` on each line 
-    * append `--user user --password pass ` (note trailing space)
-    * ***Pro Tip: Take care not to commit this file to a git repo as it contains a working password***
-  * run the file using `source <scriptfile>`. This will pull in the data files to the current working directory
+    * The `<space>` is simply a trailing space character 
+    * Hence to build this script file: 
+      * prepend `wget` on each line 
+      * append `--user user --password pass ` (note trailing space)
+      * ***Pro Tip: Take care not to commit this file to a git repo as it contains a working password***
+    * run the file using `source <scriptfile>`. This will pull in the data files to the current working directory
   
 
-The above procedure writes data files (`.h5`) into the Jupyter pod. Nothing up to this point has touched the 
+The above procedures write your data files (`.h5`) into the Jupyter pod. Nothing up to this point has touched the 
 AWS (Amazon Web Services) public cloud. The next step writes data to an S3 bucket. Either you will be able to write 
 the data across using the AWS command line or you won't. In the latter case the probable cause involves authentication 
 keys, not covered here. 
