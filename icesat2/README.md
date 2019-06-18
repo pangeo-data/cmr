@@ -10,35 +10,36 @@ file volumes from a few to upwards of 100MB.
 
 ## order data, place on S3 
 
-This procedure is unnecessarily cumbersome and should be consolidated to a single AWS script. My example
-here pulls files from NSIDC to a Jupyter notebook pod and then writes them to S3. 
+This procedure gets 60 HDF5 Icesat-2 files into my Jupyter environment; and then copies them to a folder
+on the AWS cloud. This could be consolidated to a single step straight to the cloud but I want to explore
+the data hence my Jupyter-local copy. 
 
-* go to the NSIDC data portal
-* go to the **earthdata** browser (you will need to sign in)
+* go to the [NSIDC icesat2 data portal](https://nsidc.org/data/icesat-2/products)
+* go to the **earthdata** browser (sign in)
 * use the map interface to outline a polygon (last click on first click marker to close)
   * a region the size of the Juneau icefield gave about 60 granules
 * choose a direct download
 * click **View Download Data Links** to get a list of URLs
-* copy that into a text file using a Jupyter terminal
+* copy that into a text file on the Jupyter terminal
   * prepend `wget` on each line
   * append `--user user --password pass`
-    * Please take care not to commit this file to a repo if it contains a working password
-  * source the file: This pulls in 100MB x n_files files
+    * Please take care not to commit this file to a git repo if it contains a working password
+  * source the file: This pulls in `100MB x n_files` files
   
 This places a bunch of data files (`.h5`) in the Jupyter pod. Nothing up to this point has touched on the Amazon Web Services
 public cloud. The next step writes data to an S3 bucket. Either you will be able to write the data across using the AWS
-command line or you won't. In the latter case the probable cause involves authentication keys. 
+command line or you won't. In the latter case the probable cause involves authentication keys, not covered here. 
 
 * In the Jupyter terminal go to the directory that contains the data to copy to the cloud
 * identify an S3 bucket for the data to land in. 
   * It need not include the folder path; that will be created automatically
-* In the case of this data here is the command
+* run:
 
 ```
 aws s3 sync ./ s3://pangeo-data-upload-oregon/icesat2/juneauicefield
 ```
 
-This may run very quickly. To verify success issue the following, taking care to include the final `/` character:
+This may finish very quickly. To verify success issue the following, taking care to include the final `/` character:
 
 ```
 aws s3 ls s3://pangeo-data-upload-oregon/icesat2/juneauicefield/
