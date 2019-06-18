@@ -20,9 +20,9 @@ the data hence my Jupyter-local copy.
 * **earthdata Search** link (sign in)
 * use the map interface to outline a polygon (last click on first click marker to close)
   * a region the size of the Juneau icefield gave about 60 granules
-* choose a direct download
-* click **View Download Data Links** to get a list of URLs
-* copy that into a text file on the Jupyter terminal
+* download all results; choose direct download; Download Data button
+* Order status page: Click on **View/Download Data Links** to get a list of granule URLs
+* Copy this list of URLs; transfer to a text file (I edit from the Jupyter terminal using `vi`)
   * prepend `wget` on each line
   * append `--user user --password pass`
     * Please take care not to commit this file to a git repo if it contains a working password
